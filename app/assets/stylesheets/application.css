@@ -1,6 +1,13 @@
 .navibar {
-    padding: 10px;
+    padding: 15px;
     background: #EFEFEF;
+}
+
+.button {
+  font-size: 14px;
+  background-color: #f4511e;
+  color: #FFFFFF;
+
 }
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
