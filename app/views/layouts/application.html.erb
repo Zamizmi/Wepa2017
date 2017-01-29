@@ -13,6 +13,18 @@
     <button type="button"><%= link_to "Ratings", ratings_path%></button>
   </div>
 
+
+  <% if not session[:user_id].nil? %>
+    <p><%User.find(session[:user_id]).username %> signed in</p>
+  <%end%>
+  <!-- TEST FOR USER SESSION
+  <% if session[:last_rating].nil?%>
+    <p>No ratings given</p>
+  <% else %>
+    <p> Previous rating: <%= session[:last_rating]%></p>
+  <%end%>
+-->
+
   <%= yield %>
 
 </body>
