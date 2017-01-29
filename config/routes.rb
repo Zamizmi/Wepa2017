@@ -9,7 +9,9 @@ Rails.application.routes.draw do
 
   #hassusti kaikki oluet
   get 'kaikki_bisset', to: 'beers#index'
-  get 'signup', to:'users#new'
+  get 'signup', to: 'users#new'
+  get 'signin', to: 'sessions#new'
+  delete 'signout', to: 'sessions#destroy'
   #hatavara
   #get 'ratings', to: 'ratings#index'
   #get 'ratings/new', to:'ratings#new'

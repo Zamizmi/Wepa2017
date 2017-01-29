@@ -19,6 +19,8 @@
   beer has not yet been rated!
 <% else %>Has <%=@beer.ratings.count%> <%="rating".pluralize(@beer.ratings.count)%>, Average <%=@beer.AverageRating%> <% end %></p>
 
-<button type="button"><%= link_to "Add Rating", new_rating_path%></button>
-<button type="button"><%= link_to "Edit beer", edit_beer_path%></button>
-<button type="button"><%= link_to "Back", beers_path%></button>
+<div class="to_button">
+<%= link_to "Add Rating", new_rating_path%>
+<%= link_to "Edit beer", edit_beer_path%>
+<%= link_to "Back", beers_path%>
+</div>

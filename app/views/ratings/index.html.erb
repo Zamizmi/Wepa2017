@@ -1,12 +1,27 @@
 <p id="notice"><%= notice %></p>
 
-<h2>List of ratings</h2>
+<h1>Listing ratings</h2>
 <p>Number of ratings: <%=@ratings.count%></p>
 
-<ul>
-  <% @ratings.each do |rating| %>
-    <li> <%=rating %> <button type="button"> <%= link_to 'Delete', rating_path(rating.id), method: :Delete, data: { confirm: 'Are you sure?' } %></button> </li>
-    <%end%>
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th>Beer</th>
+      <th>Score</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
 
-<%= link_to "New Rating", new_rating_path%>
+  <tbody>
+    <% @ratings.each do |rating| %>
+    <tr>
+      <td><%= rating.beer %></td>
+      <td><%= rating.score%></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="to_button">
+  <%= link_to "New Rating", new_rating_path%>
+</div>

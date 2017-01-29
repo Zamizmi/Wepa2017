@@ -7,15 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="navibar">
-    <button type="button"><%= link_to 'Breweries', breweries_path %></button>
-    <button type="button"><%= link_to 'Beers', beers_path %></button>
-    <button type="button"><%= link_to "Ratings", ratings_path%></button>
-  </div>
+  <ul class="navibar", id="Topnav">
+    <li><%= link_to 'Breweries', breweries_path %></li>
+    <li><%= link_to 'Beers', beers_path %></li>
+    <li><%= link_to "Ratings", ratings_path%></li>
+    <li><%= link_to "Users", users_path%></li>
+    <!-- TODO <button type="button"><%= link_to "Ratings", ratings_path%></button>
+    TODO <button type="button"><%= link_to "Ratings", ratings_path%></button> -->
+  </ul>
 
 
-  <% if not session[:user_id].nil? %>
-    <p><%User.find(session[:user_id]).username %> signed in</p>
+  <% if current_user %>
+    <p><%current_user.username %> signed in</p>
   <%end%>
   <!-- TEST FOR USER SESSION
   <% if session[:last_rating].nil?%>
@@ -24,7 +27,7 @@
     <p> Previous rating: <%= session[:last_rating]%></p>
   <%end%>
 -->
-
+<a href="https://static.pexels.com/photos/8755/food-cold-wood-hand.jpg">Link to image</a>
   <%= yield %>
 
 </body>
