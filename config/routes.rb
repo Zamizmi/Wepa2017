@@ -6,18 +6,11 @@ Rails.application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
 
   root 'breweries#index'
-
-  #hassusti kaikki oluet
-  get 'kaikki_bisset', to: 'beers#index'
   get 'signup', to: 'users#new'
   get 'signin', to: 'sessions#new'
-  delete 'signout', to: 'sessions#destroy'
-  #hatavara
-  #get 'ratings', to: 'ratings#index'
-  #get 'ratings/new', to:'ratings#new'
-  #post 'ratings', to: 'ratings#create'
-
-
+  get 'signout', to: 'sessions#destroy'
+  #Show All beers
+  get 'kaikki_bisset', to: 'beers#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

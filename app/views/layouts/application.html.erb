@@ -15,20 +15,23 @@
     <!-- TODO <button type="button"><%= link_to "Ratings", ratings_path%></button>
     TODO <button type="button"><%= link_to "Ratings", ratings_path%></button> -->
   </ul>
+  <ul class="navibar", id="Topnav">
+    <% if current_user%>
+    <li><%= link_to current_user.username, edit_user_path(current_user)%> </li>
+    <li><%= link_to 'Rate a beer', new_rating_path%></li>
+    <li><%= link_to 'Sign out', signout_path%></li>
+    <% else %>
+    <li> <%= link_to 'Sign in', signin_path%></li>
+    <li> <%= link_to 'Sign up', signup_path%></li>
+    <% end %>
+  </ul>
 
 
   <% if current_user %>
-    <p><%current_user.username %> signed in</p>
+    <p> Signed in as <%=current_user.username %></p>
   <%end%>
-  <!-- TEST FOR USER SESSION
-  <% if session[:last_rating].nil?%>
-    <p>No ratings given</p>
-  <% else %>
-    <p> Previous rating: <%= session[:last_rating]%></p>
-  <%end%>
--->
-<a href="https://static.pexels.com/photos/8755/food-cold-wood-hand.jpg">Link to image</a>
-  <%= yield %>
+
+<%= yield %>
 
 </body>
 </html>
