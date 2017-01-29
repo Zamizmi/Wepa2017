@@ -61,10 +61,9 @@ table td {
 }
 
 .to_button a {
-  color: #F2F2F2;
+  color: #FFF;
   display: inline-block;
   background-color: #333;
-  color: #000;
   text-align: center;
   padding: 16px 18px;
   text-decoration: none;
