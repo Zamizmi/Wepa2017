@@ -13,20 +13,21 @@ class RatingsController < ApplicationController
 
   def destroy
     rating = Rating.find(params[:id])
-    #respond_to do |format|
-      #format.html { redirect_to ratings_url, notice: 'Rating was successfully destroyed.' }
-      #format.json { head :no_content }
-      rating.delete
-      redirect_to ratings_url
-    #end
+    rating.delete
+    redirect_to :back
   end
 
   def create
-    rating = Rating.create params.require(:rating).permit(:score, :beer_id)
-    #save the created rating to the session
-    session[:last_rating] = "#{rating.beer.name} #{rating.score} points"
+    @rating = Rating.create params.require(:rating).permit(:score, :beer_id)
 
-    redirect_to ratings_path
+    if @rating.save
+      current_user.ratings << @rating
+      redirect_to user_path current_user
+    else
+      @beers = Beer.all
+      render :new
+    end
+    #save the created rating to the session
   end
 
   # GET /ratings/1/edit

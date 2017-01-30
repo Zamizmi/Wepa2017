@@ -17,7 +17,7 @@
   </ul>
   <ul class="navibar", id="Topnav">
     <% if current_user%>
-    <li><%= link_to current_user.username, edit_user_path(current_user)%> </li>
+    <li><%= link_to current_user.username, user_path(current_user)%> </li>
     <li><%= link_to 'Rate a beer', new_rating_path%></li>
     <li><%= link_to 'Sign out', signout_path%></li>
     <% else %>
