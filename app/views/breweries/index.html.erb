@@ -3,7 +3,7 @@
 <h1>Listing Breweries</h1>
 <p> Number of breweries: <%= @breweries.count %> </p>
 
-
+<% unless @breweries.nil?%>
 <table>
   <thead>
     <tr>
@@ -24,8 +24,10 @@
     <% end %>
   </tbody>
 </table>
+<% end %>
 
 <div class="to_button">
   <%= link_to 'New Brewery', new_brewery_path %>
   <%= link_to 'List of beers', beers_path%>
+  <%= link_to 'Beer Clubs', beer_clubs_path%>
 </div>

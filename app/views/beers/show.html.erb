@@ -15,9 +15,27 @@
   <%= @beer.brewery.name %>
 </p>
 
-<p><% if @beer.ratings.empty? %>
-  beer has not yet been rated!
-<% else %>Has <%=@beer.ratings.count%> <%="rating".pluralize(@beer.ratings.count)%>, Average <%=@beer.AverageRating%> <% end %></p>
+<% if @beer.ratings.count >0%>
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Score</th>
+      <th>Date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @beer.ratings.each do |rating| %>
+      <tr>
+        <td><%= link_to rating.user.username, user_path(rating.user.id)%></td>
+        <td><%= rating.score %></td>
+        <td><%= rating.created_at.year%> - <%=rating.created_at.month%> - <%=rating.created_at.day%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
 
 <div class="to_button">
 <%= link_to "Add Rating", new_rating_path%>

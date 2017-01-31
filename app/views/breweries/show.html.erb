@@ -16,14 +16,35 @@
   <%= @brewery.beers.count %>
 </p>
 
-<p>
- <% @brewery.beers.each do |beer| %>
-  <%= link_to beer.name, beer%>
- <% end %>
-</p>
+<% if @brewery.beers.count >0%>
+<table>
+  <thead>
+    <tr>
+      <th>Beer</th>
+      <th>Style</th>
+      <th>Average rating</th>
+      <th>Number of ratings</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @brewery.beers.each do |beer| %>
+      <tr>
+        <td><%= link_to beer.name, beer%></td>
+        <td><%= beer.style %></td>
+        <td><%= beer.AverageRating%></td>
+        <td><%= beer.ratings.count%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+
 <p><% if @brewery.ratings.empty? %>
   Brewery has not yet been rated!
-  <% else %> Has <%=@brewery.ratings.count%> <%="rating".pluralize(@brewery.ratings.count)%>, average <%=@brewery.AverageRating%> <%end%></p>
+  <% else %>
+  Has <%=@brewery.ratings.count%> <%="rating".pluralize(@brewery.ratings.count)%>, average <%=@brewery.AverageRating%>
+  <%end%></p>
 
 <div class="to_button">
   <%= link_to 'Edit', edit_brewery_path(@brewery) %>

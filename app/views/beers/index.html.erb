@@ -3,6 +3,7 @@
 <h1 class="beer_header">Listing Beers</h1>
 <p>Number of beers: <%=@beers.count%></p>
 
+<% unless @beers.nil?%>
 <div class="tables">
 <table>
   <thead>
@@ -27,10 +28,12 @@
   </tbody>
 </table>
 </div>
+<% end %>
 
 <br>
 
 <div class="to_button">
   <%= link_to 'New Beer', new_beer_path %>
   <%= link_to 'List of breweries', breweries_path %>
+  <%= link_to 'Beer Clubs', beer_clubs_path%>
 </div>

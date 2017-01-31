@@ -5,12 +5,13 @@ class SessionsController < ApplicationController
   end
 
   def create
-    #search by username
     user = User.find_by username: params[:username]
-    # save the user_id to session
-    session[:user_id] = user.id if not user.nil?
-    # redirect to users own page
-    redirect_to user
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect_to user_path(user), notice: "Welcome back!"
+    else
+      redirect_to :back, notice: "Username and/or password mismatch"
+    end
   end
 
   def destroy

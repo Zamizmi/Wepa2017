@@ -29,6 +29,7 @@ class UsersController < ApplicationController
       redirect_to :back, notice: "#{params[:username]} does not exist!"
     else
       session[:user_id] = user.id
+      user.save
       redirect_to user, notice: "Welcome back #{user.username}!"
     end
   end
@@ -50,11 +51,16 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    user = User.find(params[:id])
+    user.delete if current_user == user
+    redirect_to :back
+    #@user.destroy
+    #current_user = nil
+    #session[:user_id] = nil
+    #respond_to do |format|
+      #format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      #format.json { head :no_content }
+    #end
   end
 
   private
@@ -65,6 +71,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username)
+      params.require(:user).permit(:username, :password, :password_confirmation)
     end
 end

@@ -13,12 +13,12 @@ class RatingsController < ApplicationController
 
   def destroy
     rating = Rating.find(params[:id])
-    rating.delete
+    rating.delete if current_user == rating.user
     redirect_to :back
   end
 
   def create
-    @rating = Rating.create params.require(:rating).permit(:score, :beer_id)
+    @rating = Rating.new params.require(:rating).permit(:score, :beer_id)
 
     if @rating.save
       current_user.ratings << @rating
@@ -27,7 +27,6 @@ class RatingsController < ApplicationController
       @beers = Beer.all
       render :new
     end
-    #save the created rating to the session
   end
 
   # GET /ratings/1/edit

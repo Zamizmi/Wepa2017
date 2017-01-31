@@ -7,7 +7,31 @@
 <% else %><%=@user.ratings.count%> <%="rating".pluralize(@user.ratings.count)%>, with the average of <%=@user.AverageRating%>
 <% end %></p>
 
+<% if @user.memberships.count >0 %>
+  <table>
+    <thead>
+      <tr>
+        <th>Beer Club</th>
+        <th>Member since</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
 
+    <tbody>
+      <% @user.memberships.each do |membership| %>
+      <tr>
+        <td><%= link_to membership.beer_club.name, membership.beer_club%></td>
+        <td><%= membership.created_at.year%> - <%= membership.created_at.month%> - <%= membership.created_at.day%></td>
+        <% if membership.user == current_user %>
+        <td><%= link_to 'Leave club', membership, method: :delete, data: { confirm:  'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
+
+<% if @user.ratings.count >0 %>
   <table>
     <thead>
       <tr>
@@ -22,14 +46,17 @@
       <tr>
         <td><%= rating.beer %></td>
         <td><%= rating.score%></td>
-        <td><%= link_to 'Delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user == rating.user%>
+          <td><%= link_to 'Delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Edit', edit_user_path(@user) %></td>
+        <% end %>
       </tr>
       <% end %>
     </tbody>
   </table>
+  <% end %>
 
 
 <div class="to_button">
-  <%= link_to 'Edit', edit_user_path(@user) %> |
   <%= link_to 'Back', users_path %>
 </div>
