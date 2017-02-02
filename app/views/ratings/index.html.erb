@@ -17,7 +17,7 @@
     <tbody>
       <% @ratings.each do |rating| %>
       <tr>
-        <td><%= rating.beer %></td>
+        <td><%= link_to rating.beer, rating.beer %></td>
         <td><%= rating.score%></td>
         <%if rating.user %>
         <td><%= link_to rating.user.username.capitalize, rating.user%></td>
