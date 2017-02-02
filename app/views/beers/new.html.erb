@@ -11,11 +11,11 @@
   </ul>
 </div>
 <% end %>
-  Name: <%=f.text_field :name%>
-  Brewery: <%= f.select :brewery_id, options_from_collection_for_select(@breweries, :id, :to_s)%>
-  Style: <%= f.select :style, options_for_select(@styles, :style)%>
+Name: <%=f.text_field :name%>
+Brewery: <%= f.select :brewery_id, options_from_collection_for_select(@breweries, :id, :to_s)%>
+Style: <%= f.select :style, options_for_select(@styles, :style)%>
 
-  <%= f.submit%>
+<%= f.submit%>
 <% end %>
 
 <div class="to_button">

@@ -27,18 +27,18 @@
   </thead>
   <tbody>
     <% @beer.ratings.each do |rating| %>
-      <tr>
-        <td><%= link_to rating.user.username, user_path(rating.user.id)%></td>
-        <td><%= rating.score %></td>
-        <td><%= rating.created_at.year%> - <%=rating.created_at.month%> - <%=rating.created_at.day%></td>
-      </tr>
+    <tr>
+      <td><%= link_to rating.user.username, user_path(rating.user.id)%></td>
+      <td><%= rating.score %></td>
+      <td><%= rating.created_at.year%> - <%=rating.created_at.month%> - <%=rating.created_at.day%></td>
+    </tr>
     <% end %>
   </tbody>
 </table>
 <% end %>
 
 <div class="to_button">
-<%= link_to "Add Rating", new_rating_path%>
-<%= link_to "Edit beer", edit_beer_path%>
-<%= link_to "Back", beers_path%>
+  <%= link_to "Add Rating", new_rating_path%>
+  <%= link_to "Edit beer", edit_beer_path%>
+  <%= link_to "Back", beers_path%>
 </div>

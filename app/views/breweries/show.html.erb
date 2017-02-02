@@ -2,13 +2,12 @@
 
 <h2>
   <strong>
-  <%= @brewery.name %>
+    <%= @brewery.name %>
   </strong>
 </h2>
 
 <p>
-  <i>Established in:
-  <%= @brewery.year %></i>
+  <i>Established in: <%= @brewery.year %></i>
 </p>
 
 <p>
@@ -29,12 +28,12 @@
   </thead>
   <tbody>
     <% @brewery.beers.each do |beer| %>
-      <tr>
-        <td><%= link_to beer.name, beer%></td>
-        <td><%= beer.style %></td>
-        <td><%= beer.AverageRating%></td>
-        <td><%= beer.ratings.count%></td>
-      </tr>
+    <tr>
+      <td><%= link_to beer.name.capitalize, beer%></td>
+      <td><%= beer.style.capitalize %></td>
+      <td><%= beer.AverageRating%></td>
+      <td><%= beer.ratings.count%></td>
+    </tr>
     <% end %>
   </tbody>
 </table>
@@ -46,7 +45,7 @@
   Has <%=@brewery.ratings.count%> <%="rating".pluralize(@brewery.ratings.count)%>, average <%=@brewery.AverageRating%>
   <%end%></p>
 
-<div class="to_button">
-  <%= link_to 'Edit', edit_brewery_path(@brewery) %>
-  <%= link_to 'Back', breweries_path %>
-</div>
+  <div class="to_button">
+    <%= link_to 'Edit', edit_brewery_path(@brewery) %>
+    <%= link_to 'Back', breweries_path %>
+  </div>
