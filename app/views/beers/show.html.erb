@@ -37,8 +37,8 @@
 </table>
 <% end %>
 
+<% if current_user%>
 <div class="to_button">
   <%= link_to "Add Rating", new_rating_path%>
-  <%= link_to "Edit beer", edit_beer_path%>
-  <%= link_to "Back", beers_path%>
 </div>
+<% end %>
