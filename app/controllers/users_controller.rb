@@ -26,11 +26,12 @@ class UsersController < ApplicationController
   def create
     user = User.new(user_params)
     if user.nil?
-      redirect_to :back, notice: "#{params[:username]} does not exist!"
+      redirect_to :back, notice: "Error occurred with creating new user! Username needs to be four characters long!
+      Password and password confirmation needs to be identical and minimum of 4 characters long containing at least one number [0-9] and one capital letter [A-Z]!"
     else
       session[:user_id] = user.id
       user.save
-      redirect_to user, notice: "Welcome back #{user.username}!"
+      redirect_to signin_path, notice: "User successfully created!"
     end
   end
 
@@ -50,17 +51,12 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   # DELETE /users/1.json
+
   def destroy
     user = User.find(params[:id])
-    user.delete if current_user == user
+    user.destroy if current_user == user
+    reset_session
     redirect_to :back
-    #@user.destroy
-    #current_user = nil
-    #session[:user_id] = nil
-    #respond_to do |format|
-      #format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      #format.json { head :no_content }
-    #end
   end
 
   private

@@ -3,25 +3,20 @@ class MembershipsController < ApplicationController
 
   # GET /memberships
   # GET /memberships.json
-  def index
-    @memberships = Membership.all
-  end
 
   # GET /memberships/1
   # GET /memberships/1.json
-  def show
-  end
 
   # GET /memberships/new
   def new
     @membership = Membership.new
     @beer_clubs = BeerClub.all
     @users = User.all
+    @new_beer_clubs = BeerClub.all
+    @new_beer_clubs.delete(current_user.beer_clubs.ids)
   end
 
   # GET /memberships/1/edit
-  def edit
-  end
 
   # POST /memberships
   # POST /memberships.json
@@ -31,7 +26,7 @@ class MembershipsController < ApplicationController
 
     respond_to do |format|
       if @membership.save
-        format.html { redirect_to @membership, notice: 'Your membership was successfully created.' }
+        format.html { redirect_to beer_clubs_path, notice: 'Your membership was successfully created.' }
         format.json { render :show, status: :created, location: @membership }
       else
         format.html { render :new }
@@ -42,24 +37,15 @@ class MembershipsController < ApplicationController
 
   # PATCH/PUT /memberships/1
   # PATCH/PUT /memberships/1.json
-  def update
-    respond_to do |format|
-      if @membership.update(membership_params)
-        format.html { redirect_to @membership, notice: 'Your membership was successfully updated.' }
-        format.json { render :show, status: :ok, location: @membership }
-      else
-        format.html { render :edit }
-        format.json { render json: @membership.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   # DELETE /memberships/1
   # DELETE /memberships/1.json
   def destroy
-    @membership.destroy
+    membership = membership.find(params[:id])
+    membership.delete if current_user == membership.user
+    reset_session
     respond_to do |format|
-      format.html { redirect_to memberships_url, notice: 'Your membership was successfully ended.' }
+      format.html { redirect_to beer_clubs_path, notice: 'Your membership was successfully ended.' }
       format.json { head :no_content }
     end
   end

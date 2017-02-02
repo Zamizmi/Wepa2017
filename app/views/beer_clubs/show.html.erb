@@ -1,24 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @beer_club.name %>
-</p>
+<h1>
+  <%= @beer_club.name.capitalize %>
+</h1>
 
-<p>
-  <strong>Founded:</strong>
+<h2>
+  Founded:
   <%= @beer_club.founded %>
-</p>
+</h2>
 
-<p>
-  <strong>City:</strong>
-  <%= @beer_club.city %>
-</p>
+<h2>
+  City:
+  <%= @beer_club.city.capitalize %>
+</h2>
 
-<p>
-  Number of members
+<h2>
+  Number of members:
   <%= @beer_club.memberships.count %>
-</p>
+</h2>
 
 <% if @beer_club.memberships.count >0%>
 <table>
@@ -33,7 +32,7 @@
   <tbody>
     <% @beer_club.memberships.each do |membership| %>
     <tr>
-      <td><%= link_to membership.user.username, membership.user%></td>
+      <td><%= link_to membership.user.username.capitalize, membership.user%></td>
       <td><%= membership.created_at.year%> - <%=membership.created_at.month%> - <%= membership.created_at.day%></td>
       <% if current_user == membership.user_id%>
       <td><%= link_to 'Leave club', membership, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -44,6 +43,8 @@
   </tbody>
 </table>
 <% end %>
+<br>
+
 <div class="to_button">
   <%= link_to 'Back', beer_clubs_path %>
 </div>

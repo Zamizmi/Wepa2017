@@ -2,7 +2,8 @@ class BeerClub < ActiveRecord::Base
   include AverageRating
 
   has_many :memberships, dependent: :destroy
-	has_many :users, through: :memberships
+	has_many :users, -> { uniq }, through: :memberships
+
 
   def year_date_cannot_be_in_the_future
     if self.founded > Date.today.year

@@ -9,7 +9,8 @@
       <th>Name</th>
       <th>Founded</th>
       <th>City</th>
-      <th colspan="3"></th>
+      <th>Members</th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
@@ -19,8 +20,11 @@
       <td><%= link_to beer_club.name.capitalize, beer_club_path(beer_club) %></td>
       <td><%= beer_club.founded %></td>
       <td><%= beer_club.city.capitalize %></td>
+      <td><%= beer_club.memberships.count%></td>
       <% if current_user %>
-      <td><%= link_to "Join club", new_membership_path%></td>
+      <% unless beer_club.users.include? (current_user)%>
+      <td><%= link_to 'Join Club', new_membership_path%></td>
+      <% end %>
       <% end %>
     </tr>
     <% end %>

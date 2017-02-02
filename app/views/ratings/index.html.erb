@@ -30,12 +30,13 @@
     </tbody>
   </table>
   <% end %>
+  <br>
 
   <div class="to_button">
-    <p>Sign in to add Ratings!</p>
     <% if current_user%>
     <%= link_to 'Add rating', new_rating_path%>
     <% else %>
+    <p>Sign in to add Ratings!</p>
     <%= link_to 'Sign in', signin_path%>
     <% end %>
   </div>

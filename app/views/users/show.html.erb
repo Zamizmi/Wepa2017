@@ -1,7 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Username: <%= @user.username %>
-</h1>
+<h1><%= @user.username.capitalize %></h1>
 <p> Has made <% if @user.ratings.empty? %>
   0 ratings!
   <% else %><%=@user.ratings.count%> <%="rating".pluralize(@user.ratings.count)%>, with the average of <%=@user.AverageRating%>
@@ -16,7 +15,7 @@
         <th colspan="2"></th>
       </tr>
     </thead>
-    
+
     <tbody>
       <% @user.memberships.each do |membership| %>
       <tr>
