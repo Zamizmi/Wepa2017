@@ -19,6 +19,8 @@ class BeerClubsController < ApplicationController
 
   # GET /beer_clubs/1/edit
   def edit
+    if user && user.authenticate(params[:password])
+    end
   end
 
   # POST /beer_clubs
@@ -54,10 +56,12 @@ class BeerClubsController < ApplicationController
   # DELETE /beer_clubs/1
   # DELETE /beer_clubs/1.json
   def destroy
+    if user && user.authenticate(params[:password])
     @beer_club.destroy
     respond_to do |format|
       format.html { redirect_to beer_clubs_url, notice: 'Beer club was successfully destroyed.' }
       format.json { head :no_content }
+    end
     end
   end
 

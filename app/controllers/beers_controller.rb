@@ -21,8 +21,10 @@ class BeersController < ApplicationController
 
   # GET /beers/1/edit
   def edit
+    if user && user.authenticate(params[:password])
     @breweries = Brewery.all
     @styles = ["Weizen", "Lager", "Pale ale", "IPA", "Porter"]
+  end
   end
 
   def brewery_name
@@ -50,6 +52,7 @@ class BeersController < ApplicationController
   # PATCH/PUT /beers/1
   # PATCH/PUT /beers/1.json
   def update
+    if user && user.authenticate(params[:password])
     respond_to do |format|
       if @beer.update(beer_params)
         format.html { redirect_to @beer, notice: 'Beer was successfully updated.' }
@@ -59,15 +62,18 @@ class BeersController < ApplicationController
         format.json { render json: @beer.errors, status: :unprocessable_entity }
       end
     end
+    end
   end
 
   # DELETE /beers/1
   # DELETE /beers/1.json
   def destroy
+    if user && user.authenticate(params[:password])
     @beer.destroy
     respond_to do |format|
       format.html { redirect_to beers_url, notice: 'Beer was successfully destroyed.' }
       format.json { head :no_content }
+    end
     end
   end
 

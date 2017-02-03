@@ -29,7 +29,6 @@ class UsersController < ApplicationController
       redirect_to :back, notice: "Error occurred with creating new user! Username needs to be four characters long!
       Password and password confirmation needs to be identical and minimum of 4 characters long containing at least one number [0-9] and one capital letter [A-Z]!"
     else
-      session[:user_id] = user.id
       user.save
       redirect_to signin_path, notice: "User successfully created!"
     end
