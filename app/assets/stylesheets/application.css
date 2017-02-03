@@ -60,6 +60,7 @@ table {
   border: 2px solid black;
   outline-color: #7b7777;
   font-size: 2em;
+  width: 45%;
 }
 
 table td {
@@ -69,8 +70,8 @@ table td {
 }
 
 table th {
-  padding: 10px 10px;
-  letter-spacing: 1px;
+  padding: 10px 30px;
+  letter-spacing: 2px;
 }
 
 a, a:visited {
@@ -96,18 +97,21 @@ body {
 }
 
 .to_button a {
-  margin: auto;
-  width: 50;
   color: #FFF;
   display: inline-block;
   background-color: #333;
   text-align: center;
-  padding: 16px 25%;
+  padding: 16px 45%;
   text-decoration: none;
   transition: 0.3s;
   border: 1px solid black;
   border-radius: 8px;
   font-size: 18px;
+}
+.to_button {
+  width: 45%;
+  margin: auto;
+  padding: 2%;
 }
 
 
