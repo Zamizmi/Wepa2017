@@ -24,13 +24,16 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    user = User.new(user_params)
-    if user.nil?
-      redirect_to :back, notice: "Error occurred with creating new user! Username needs to be four characters long!
-      Password and password confirmation needs to be identical and minimum of 4 characters long containing at least one number [0-9] and one capital letter [A-Z]!"
-    else
-      user.save
-      redirect_to signin_path, notice: "User successfully created!"
+    @user = User.new(user_params)
+
+    respond_to do |format|
+      if @user.save
+        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.json { render :show, status: :created, location: @user }
+      else
+        format.html { render :new }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -38,7 +41,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      if user_params[:username].nil? and @user == current_user and @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
