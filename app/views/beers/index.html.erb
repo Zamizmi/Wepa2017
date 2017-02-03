@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Beers</h1>
-<h2>Number of beers: <%=@beers.count%></h2>
+<h2>Number of Beers: <%=@beers.count%></h2>
 <body>
   <% unless @beers.nil?%>
   <div class="tables">
@@ -37,6 +37,6 @@
   <br>
 
   <div class="to_button">
-    <%=link_to 'Add a New Beer', new_beer_path %>
+    <%=link_to 'Add Beer', new_beer_path %>
   </div>
 </body>

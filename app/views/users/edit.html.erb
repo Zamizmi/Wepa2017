@@ -1,8 +1,8 @@
+<p id="notice"><%= notice %></p>
 <h1>Change password for <%=current_user.username%></h1>
 <% if current_user%>
 <%= render 'form' %>
 
 <div class="to_button">
-  <%= link_to 'Show', @user %> |
   <%= link_to 'Back', users_path %>
 </div>

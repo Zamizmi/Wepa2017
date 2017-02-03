@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Ratings</h2>
-  <h2>Number of ratings: <%=@ratings.count%></h2>
+  <h2>Number of Ratings: <%=@ratings.count%></h2>
 
   <% unless @ratings.nil?%>
   <table class="ratings">
@@ -10,7 +10,7 @@
         <th>Beer</th>
         <th>Score</th>
         <th>User</th>
-        <th colspan="3"></th>
+        <th colspan="1"></th>
       </tr>
     </thead>
 
@@ -36,7 +36,8 @@
     <% if current_user%>
     <%= link_to 'Add rating', new_rating_path%>
     <% else %>
-    <p>Sign in to add Ratings!</p>
+    <h2>Sign in to add Ratings!</h2>
+    <br>
     <%= link_to 'Sign in', signin_path%>
     <% end %>
   </div>

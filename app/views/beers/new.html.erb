@@ -1,24 +1,7 @@
+<p id="notice"><%= notice %></p>
 <h1>New Beer</h1>
 
-<%= form_for(@beer) do |f| %>
-<% if @beer.errors.any?%>
-<div id="error_explanation">
-  <h2><%=pluralize(@beer.errors.count, "error") %> prohibited rating from being saved: </h2>
-  <ul>
-    <% @beer.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-    <% end %>
-  </ul>
-</div>
-<% end %>
-<h2>Name</h2><br> <%=f.text_field :name%><br>
-<h2>Brewery</h2><br> <%= f.select :brewery_id, options_from_collection_for_select(@breweries, :id, :to_s)%><br>
-<h2>Style</h2><br> <%= f.select :style, options_for_select(@styles, :style)%>
-
-<br>
-<br>
-<%= f.submit%>
-<% end %>
+<%= render 'form' %>
 <br>
 <div class="to_button">
   <%= link_to 'Back', beers_path %>

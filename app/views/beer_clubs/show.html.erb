@@ -1,24 +1,23 @@
 <p id="notice"><%= notice %></p>
-
 <h1>
   <%= @beer_club.name.capitalize %>
 </h1>
+<div class="info">
+  <h2>
+    Founded:
+    <%= @beer_club.founded %>
+  </h2>
 
-<h2>
-  Founded:
-  <%= @beer_club.founded %>
-</h2>
+  <h2>
+    City:
+    <%= @beer_club.city.capitalize %>
+  </h2>
 
-<h2>
-  City:
-  <%= @beer_club.city.capitalize %>
-</h2>
-
-<h2>
-  Number of members:
-  <%= @beer_club.memberships.count %>
-</h2>
-
+  <h2>
+    Members: 
+    <%= @beer_club.memberships.count %>
+  </h2>
+</div>
 <% if @beer_club.memberships.count >0%>
 <table>
   <thead>

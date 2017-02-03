@@ -1,19 +1,26 @@
 <p id="notice"><%= notice %></p>
 
-<h2>
-  <strong>
-    <%= @brewery.name %>
-  </strong>
-</h2>
+<h1>
+  <%= @brewery.name %>
+</h1>
+<div class="info">
+  <h2>
+    Established in: <%= @brewery.year %>
+  </h2>
 
-<p>
-  <i>Established in: <%= @brewery.year %></i>
-</p>
-
-<p>
-  Number of beers
-  <%= @brewery.beers.count %>
-</p>
+  <h2>
+    Number of beers: <%= @brewery.beers.count %>
+  </h2>
+  <% if @brewery.ratings.empty? %>
+  <h2>
+    Brewery has not yet been rated!
+  </h2>
+  <% else %>
+  <h2>
+    Has <%=@brewery.ratings.count%> <%="rating".pluralize(@brewery.ratings.count)%> with average of <%=@brewery.AverageRating%>
+  </h2>
+  <% end %>
+</div>
 
 <% if @brewery.beers.count >0%>
 <table>
@@ -38,11 +45,3 @@
   </tbody>
 </table>
 <% end %>
-
-<% if @brewery.ratings.empty? %>
-<p>
-  Brewery has not yet been rated!
-  <% else %>
-  Has <%=@brewery.ratings.count%> <%="rating".pluralize(@brewery.ratings.count)%>, average <%=@brewery.AverageRating%>
-</p>
-  <%end%>

@@ -5,12 +5,29 @@ ul.navibar {
   background-color: #333;
 }
 
-input, select{
+select {
   width: 40%;
-  padding: 12px 20px;
+  padding: 20px 0px;
   margin: auto;
-  box-sizing: border-box;
   font-size: 100%
+}
+
+.actions, input[type="submit"] {
+  width: 100%;
+  margin:auto;
+}
+
+input[type="text"], input[type="password"] {
+  margin: auto;
+  width: 100%;
+}
+form {
+  width: 50%;
+  margin: auto;
+}
+
+label {
+  font-size: 24px;
 }
 
 ul.navibar li {
@@ -34,28 +51,35 @@ ul.navibar li a:hover {
 }
 
 .info {
-  width: 25%;
-  margin: 5px;
   padding: 5px;
   border: 2px solid black;
   border-radius: 4px;
   font-size: 18px;
+  margin: auto;
+  outline-color: #7b7777;
+  width: 45%;
 }
 
 h1 {
-  padding: 2% 15% 5% 40%;
+  padding: 2%;
+  width: 10%;
   font-size: 38px;
   margin: auto;
   color: #0c265b;
 }
 h2 {
-  padding: 0% 0% 0% 40%;
+  padding: 2%;
+  width: 18%;
+  font-size: 24px;
   margin: auto;
   color: #0c265b;
 }
 
+.info h2 {
+  width: 25%;
+}
+
 table {
-  padding: 2%;
   margin: auto;
   border: 2px solid black;
   outline-color: #7b7777;
@@ -64,14 +88,18 @@ table {
 }
 
 table td {
-  margin: 0 15px;
   font-size: 18px;
   letter-spacing: 1px;
 }
 
 table th {
-  padding: 10px 30px;
-  letter-spacing: 2px;
+  text-align: left;
+}
+
+tr {
+  margin: auto;
+  padding: 5px 0;
+  letter-spacing: 4px;
 }
 
 a, a:visited {
@@ -109,7 +137,7 @@ body {
   font-size: 18px;
 }
 .to_button {
-  width: 45%;
+  width: 35%;
   margin: auto;
   padding: 2%;
 }
