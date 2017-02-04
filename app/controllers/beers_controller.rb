@@ -73,7 +73,6 @@ class BeersController < ApplicationController
       format.html { redirect_to beers_url, notice: 'Beer was successfully destroyed.' }
       format.json { head :no_content }
     end
-    end
   end
 
   private
