@@ -23,7 +23,6 @@ input[type="text"], input[type="password"], input[type="number"] {
 
 input[type="submit"] {
   width: 75%
-  padding: 0;
   color: #FFF;
   display: inline-block;
   background-color: #333;
