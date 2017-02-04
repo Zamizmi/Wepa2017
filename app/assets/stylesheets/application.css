@@ -6,9 +6,8 @@ ul.navibar {
 }
 
 select {
-  width: 40%;
-  padding: 20px 0px;
   margin: auto;
+  width: 100%;
   font-size: 100%
 }
 
@@ -17,10 +16,29 @@ select {
   margin:auto;
 }
 
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="password"], input[type="number"] {
   margin: auto;
   width: 100%;
 }
+
+input[type="submit"] {
+  padding: 4%;
+  color: #FFF;
+  display: inline-block;
+  background-color: #333;
+  text-align: center;
+  text-decoration: none;
+  transition: 0.3s;
+  border: 1px solid black;
+  border-radius: 8px;
+  font-size: 22px;
+}
+
+input[type="submit"]:hover {
+  background-color: #555;
+  margin: auto;
+}
+
 form {
   width: 50%;
   margin: auto;
@@ -69,8 +87,8 @@ h1 {
   color: #0c265b;
 }
 h2 {
+  text-align: center;
   padding: 2%;
-  width: 18%;
   font-size: 24px;
   margin: auto;
   color: #0c265b;
