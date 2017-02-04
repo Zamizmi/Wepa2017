@@ -41,7 +41,7 @@ class MembershipsController < ApplicationController
   # DELETE /memberships/1
   # DELETE /memberships/1.json
   def destroy
-    membership = membership.find(params[:id])
+    membership = Membership.find(params[:id])
     membership.delete if current_user == membership.user
     reset_session
     respond_to do |format|
