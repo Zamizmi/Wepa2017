@@ -2,6 +2,26 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
+  describe "favorite style" do
+    let(:user){FactoryGirl.create(:user)}
+
+    it "has method for determining the favorite_style" do
+      expect(user.favorite_style).to eq(nil)
+    end
+
+    it "without ratings user does not have a favorite style" do
+      expect(user.favorite_style).to eq(nil)
+    end
+
+    it "is the only rated if only one rating" do
+      beer = FactoryGirl.create(:beer)
+      rating = FactoryGirl.create(:rating, beer:beer, user:user)
+      rating = FactoryGirl.create(:rating2, beer:beer, user:user)
+
+      expect(user.favorite_style).to eq(beer.style)
+    end
+  end
+
   describe "favorite beer" do
     let(:user){FactoryGirl.create(:user)}
 

@@ -1,8 +1,7 @@
 class Brewery < ActiveRecord::Base
 	include AverageRating
 
-	validates :name, uniqueness: true,
-									length: {minimum: 3}
+	validates :name, length: {minimum: 3}
 	validates :year, numericality: { greater_than_or_equal_to: 1042,
                                     only_integer: true}
 	validate :year_date_cannot_be_in_the_future
