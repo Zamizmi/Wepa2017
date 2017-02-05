@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 group :development, :test do
+  gem 'rspec-rails', '~> 3.5'
   gem 'sqlite3'
   gem "better_errors"
 end
