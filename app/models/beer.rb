@@ -1,8 +1,9 @@
 class Beer < ActiveRecord::Base
 	include AverageRating
 
-	validates :name, uniqueness: true,
+	validates :name, presence: true,
 									length: {minimum: 3}
+	validates :style, presence: true
 
 	belongs_to :brewery
 	has_many :ratings, dependent: :destroy
