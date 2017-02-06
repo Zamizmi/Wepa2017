@@ -8,6 +8,7 @@ end
 
 group :production do
    gem 'pry'
+   gem 'pry-rails'
    gem 'pg'
    gem 'rails_12factor'
 end
