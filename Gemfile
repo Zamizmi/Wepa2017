@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   gem 'sqlite3'
-  gem "better_errors"
+  gem 'better_errors'
 end
 
 group :production do
@@ -15,6 +15,8 @@ end
 
 group :test do
   gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'launchy'
 end
 
 ruby '2.3.1'
