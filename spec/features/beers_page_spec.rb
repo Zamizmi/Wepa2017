@@ -14,7 +14,6 @@ describe "Beers page" do
     User.create username:"Pekka", password:"Foobar1", password_confirmation:"Foobar1"
     sign_in(username:"Pekka", password:"Foobar1")
     visit new_beer_path
-    save_and_open_page
 
     fill_in('beer_name', with:'')
     select("Koff", from:'beer[brewery_id]')

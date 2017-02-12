@@ -2,23 +2,35 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
+
   describe "favorite style" do
-    let(:user){FactoryGirl.create(:user)}
+    let(:user) { FactoryGirl.create(:user) }
 
-    it "has method for determining the favorite_style" do
+    it "has a method for determining one" do
+      expect(user).to respond_to(:favorite_style)
+    end
+
+    it "without ratings does not have one" do
       expect(user.favorite_style).to eq(nil)
     end
 
-    it "without ratings user does not have a favorite style" do
-      expect(user.favorite_style).to eq(nil)
-    end
-
-    it "is the only rated if only one rating" do
+    it "is the only style with a rating" do
       beer = FactoryGirl.create(:beer)
-      rating = FactoryGirl.create(:rating, beer:beer, user:user)
-      rating = FactoryGirl.create(:rating2, beer:beer, user:user)
+      brewery = FactoryGirl.create(:rating, beer:beer, user:user)
 
       expect(user.favorite_style).to eq(beer.style)
+    end
+
+    it "is the one with highest rating if several rated" do
+      beer1 = FactoryGirl.create(:beer, style:"Lager")
+      beer2 = FactoryGirl.create(:beer, style:"Lager")
+      beer3 = FactoryGirl.create(:beer, style:"IPA")
+
+      rating1 = FactoryGirl.create(:rating, beer:beer1, user:user)
+      rating2 = FactoryGirl.create(:rating, score:25,  beer:beer2, user:user)
+      rating3 = FactoryGirl.create(:rating, score:50, beer:beer3, user:user)
+
+      expect(user.favorite_style).to eq(beer3.style)
     end
   end
 

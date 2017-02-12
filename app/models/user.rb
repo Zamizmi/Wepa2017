@@ -21,7 +21,46 @@ class User < ActiveRecord::Base
 
   def favorite_style
     return nil if ratings.empty?
-    #WIP OVER HERE
-    ratings.order(score: :desc).limit(1).first.beer.style
+    calculate_style_scores
+  end
+
+  def style_ratings_average_per_style(style)
+    style_counter = self.ratings.select { |r| r.beer.style == style }
+    i = style_counter.map { |r| r.score }.inject(:+) / style_counter.count.to_f
+  end
+
+  # Kaipaa refaktorointia, mutta toimii
+  def calculate_style_scores
+    favorite =""
+    i = 0
+    self.ratings.map { |r| r.beer.style }.each do |x|
+      if style_ratings_average_per_style(x) > i
+        i = style_ratings_average_per_style(x)
+        favorite = x
+      end
+    end
+    return favorite
+  end
+
+  def favorite_brewery
+    return nil if ratings.empty?
+    calculate_brew_scores
+  end
+
+  def brewery_ratings_average_per_brewery(brewery)
+    brew_counter = self.ratings.select { |r| r.beer.brewery == brewery }
+    i = brew_counter.map { |r| r.score }.inject(:+) / brew_counter.count.to_f
+  end
+
+  def calculate_brew_scores
+    favorite =""
+    i = 0
+    self.ratings.map { |r| r.beer.brewery }.each do |x|
+      if brewery_ratings_average_per_brewery(x) > i
+        i = brewery_ratings_average_per_brewery(x)
+        favorite = x
+      end
+    end
+    return favorite
   end
 end
