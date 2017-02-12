@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Zamizmi/wadror2017.png)](https://travis-ci.org/Zamizmi/wadror2017)
+
 The URL for the amazing app
 
 https://tranquil-tundra-79062.herokuapp.com
