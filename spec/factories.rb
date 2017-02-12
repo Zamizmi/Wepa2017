@@ -6,7 +6,7 @@ FactoryGirl.define do
   end
 
   factory :brewery do
-    name "anonymous"
+    name "Koff"
     year 1900
   end
 
