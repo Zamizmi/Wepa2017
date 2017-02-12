@@ -10,8 +10,11 @@ describe "Beers page" do
 
   it "creating a beer with a not valid name gives an error" do
     FactoryGirl.create(:brewery, name: "Koff", year: 1999)
+    visit signin_path
+    User.create username:"Pekka", password:"Foobar1", password_confirmation:"Foobar1"
     sign_in(username:"Pekka", password:"Foobar1")
     visit new_beer_path
+    save_and_open_page
 
     fill_in('beer_name', with:'')
     select("Koff", from:'beer[brewery_id]')

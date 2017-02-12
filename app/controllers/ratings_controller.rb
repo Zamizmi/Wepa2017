@@ -1,5 +1,7 @@
 class RatingsController < ApplicationController
   before_action only: [:show, :edit, :update, :destroy]
+  before_action :ensure_that_signed_in, except: [:index, :show]
+
 
   def index
     @ratings = Rating.all

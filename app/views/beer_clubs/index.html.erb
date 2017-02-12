@@ -33,5 +33,11 @@
 
 <br>
 <div class="to_button">
-  <%= link_to 'New Beer club', new_beer_club_path %>
+  <% if current_user%>
+  <%= link_to 'Create Beer Club', new_beer_club_path%>
+  <% else %>
+  <h2>Sign in to add Beer Clubs!</h2>
+  <br>
+  <%= link_to 'Sign in', signin_path%>
+  <% end %>
 </div>
