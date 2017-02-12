@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/Zamizmi/wadror2017.png)](https://travis-ci.org/Zamizmi/wadror2017)
+[![Build Status](https://travis-ci.org/zamizmi/wadror2017.png)](https://travis-ci.org/zamizmi/wadror2017)
+[![Code Climate](https://codeclimate.com/github/zamizmi/wadror2017)](https://codeclimate.com/github/zamizmi/wadror2017)
 
 The URL for the amazing app
 
