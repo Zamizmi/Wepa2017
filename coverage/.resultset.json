@@ -524,6 +524,37 @@
         null,
         null
       ],
+      "/home/saklindq/VainKouluJutut/ratebeer/ratebeer/app/models/place.rb": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "/home/saklindq/VainKouluJutut/ratebeer/ratebeer/app/controllers/pages_controller.rb": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
       "/home/saklindq/VainKouluJutut/ratebeer/ratebeer/app/controllers/beer_clubs_controller.rb": [
         0,
         0,
@@ -671,7 +702,11 @@
         0,
         0
       ],
-      "/home/saklindq/VainKouluJutut/ratebeer/ratebeer/app/controllers/PagesController.rb": [
+      "/home/saklindq/VainKouluJutut/ratebeer/ratebeer/app/controllers/places_controller.rb": [
+        0,
+        0,
+        0,
+        0,
         0,
         0,
         0,
@@ -692,6 +727,6 @@
         0
       ]
     },
-    "timestamp": 1486968581
+    "timestamp": 1486977801
   }
 }
