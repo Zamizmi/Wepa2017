@@ -14,6 +14,6 @@ deploy:
   api_key:
       secure: am1l1BxYNYWrNEKz3Nv0BS/B/h7j3V6oH/hl6/1Fr+zNSR0r2Xbf+ZDcBd5swCuLMiYYMO05MZCvdWMNPpOstcJFzTAQk3wqw5qYv4bX+N4Kw1CK4ynhYZgnDgkZ/emFFsypblPrSHyTIkTPF1iXDea64X4ZsJmq9yi49Ll7pu6srlGlGAx5+qGrRUHHfq3n0fNZt7BCCBIgJdy5w9gElCXid/As9oCCylZ5IxFvKv7Jv608mbYdZIykqBMYhmTyoUBvp49cDrSOb1XhGi6inaOMcj4/U6eUhPJY/MPLEU2VzDD4M/2CCsww0ztfKkc2U0YMOsajak2CGeNQPcqKM7tWAPmxh7HA3NoqDu3TDdWWY9IHbSb9MR+QdzMSa2TwqXhR4AK64JwcXvphww3/lKWLj9GQCP29QqBoiWLDEHwMAOGZu5FOIa1ZwfbVxIGqcoZDXo+lNqh0mXYzvWQY3rvvkH1OVSaU5bvpRMoDKb2ly/t0V0/+kgsaH+h/ME7q1qEcq7Pf3vnYPXwshPGjS6Y40LA2CnnfZrOEe0F78r0Hg+gvq1ADkggXEfNCCPXwVN42koQofSEN3KhVNfL8o6LANxzRGASNFp+i95WajdqohxHfCFCdKZtszPQuIT/NY49cb24tPZVjX5oyWehwWd9TmVLheRFMUgaREguzYnY=
 
-  run: "rake db:migrate"
   app: tranquil-tundra-79062
-  repo: zamizmi/wadror2017
+  on:
+    repo: zamizmi/wadror2017
