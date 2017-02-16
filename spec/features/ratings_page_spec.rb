@@ -52,7 +52,7 @@ describe "Rating" do
     FactoryGirl.create :rating2, beer_id:3, user_id:kalle.id
     visit user_path(matti.id)
     page.find('tr', :text => "Karhu: Koff").click_link('Delete')
-    save_and_open_page
+    #save_and_open_page
 
     expect(page).to have_content("Has made 1 rating , with the average of 10.0")
     expect(Rating.count).to eq(2)
