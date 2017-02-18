@@ -45,6 +45,7 @@
 <% end %>
 </table>
 <br>
+<%end%>
 
 <div class="to_button">
   <% if current_user and if not current_user.memberships.map {|m| m.beer_club.id}.include? @beer_club.id%>
