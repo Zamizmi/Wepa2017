@@ -36,7 +36,6 @@
       <td><%= membership.created_at.year%> - <%=membership.created_at.month%> - <%= membership.created_at.day%></td>
     </tr>
   </tbody>
-</table>
 <% if current_user.id == membership.user_id%>
   <div class ="to_button">
     <%= link_to 'Leave Club', membership, method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -44,6 +43,7 @@
   <% end %>
   <% end %>
 <% end %>
+</table>
 <br>
 
 <div class="to_button">
