@@ -4,5 +4,5 @@
 <h2>Country: <%= @place_to_show.country %></h2>
 <h2>Rating: <%= @place_to_show.overall %> </h2>
 <iframe src="https://www.google.com/maps/embed/v1/search?q=<%= @place_to_show.name%>,<%= @place_to_show.country %>
-    &key=<%=ENV['gAPIKEY']%>">
+  &key=<%=ENV['gAPIKEY']%>">
 </iframe>

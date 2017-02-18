@@ -38,6 +38,12 @@
 
 <% if current_user%>
 <div class="to_button">
-  <%= link_to "Add Rating", new_rating_path%>
+  <%= form_for(@rating) do |f| %>
+    <%= f.hidden_field :beer_id %>
+    score: <%= f.number_field :score %>
+    <br>
+    <br>
+    <%= f.submit %>
+  <% end %>
 </div>
 <% end %>
