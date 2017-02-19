@@ -17,20 +17,23 @@ RSpec.describe User, type: :model do
     it "is the only style with a rating" do
       beer = FactoryGirl.create(:beer)
       brewery = FactoryGirl.create(:rating, beer:beer, user:user)
+      style = FactoryGirl.create(:style)
 
-      expect(user.favorite_style).to eq(beer.style)
+      expect(user.favorite_style).to eq(beer.style.name)
     end
 
     it "is the one with highest rating if several rated" do
-      beer1 = FactoryGirl.create(:beer, style:"Lager")
-      beer2 = FactoryGirl.create(:beer, style:"Lager")
-      beer3 = FactoryGirl.create(:beer, style:"IPA")
+      style = FactoryGirl.create(:style)
+      style2 = FactoryGirl.create(:style2)
+      beer1 = FactoryGirl.create(:beer, style_id:style.id)
+      beer2 = FactoryGirl.create(:beer, style_id:style.id)
+      beer3 = FactoryGirl.create(:beer, style_id:style2.id)
 
       rating1 = FactoryGirl.create(:rating, beer:beer1, user:user)
       rating2 = FactoryGirl.create(:rating, score:25,  beer:beer2, user:user)
       rating3 = FactoryGirl.create(:rating, score:50, beer:beer3, user:user)
 
-      expect(user.favorite_style).to eq(beer3.style)
+      expect(user.favorite_style).to eq(beer3.style.name)
     end
   end
 

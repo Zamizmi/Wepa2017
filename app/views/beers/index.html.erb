@@ -19,7 +19,7 @@
         <% @beers.each do |beer| %>
         <tr>
           <td><%= link_to beer.name.capitalize, beer %></td>
-          <td><%= beer.style.capitalize %></td>
+          <td><%= beer.style.name.capitalize %></td>
           <td><%= link_to beer.brewery.name.capitalize, brewery_path(beer.brewery_id) %></td>
           <% if current_user%>
           <td><%= link_to 'Edit', edit_beer_path(beer) %></td>

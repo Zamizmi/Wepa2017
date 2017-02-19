@@ -10,10 +10,20 @@ FactoryGirl.define do
     year 1900
   end
 
+  factory :style do
+    name "Lager"
+    description "the best lager"
+  end
+
+  factory :style2, class: Style do
+    name "IPA"
+    description "the worst IPA"
+  end
+
   factory :beer do
     name "anonymousbeer"
     brewery
-    style "Lager"
+    style_id 1
   end
 
   factory :rating do

@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
         favorite = x
       end
     end
-    return favorite
+    return favorite.name
   end
 
   def favorite_brewery

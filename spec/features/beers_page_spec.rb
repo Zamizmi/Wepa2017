@@ -10,6 +10,7 @@ describe "Beers page" do
 
   it "creating a beer with a not valid name gives an error" do
     FactoryGirl.create(:brewery, name: "Koff", year: 1999)
+    FactoryGirl.create(:style)
     visit signin_path
     User.create username:"Pekka", password:"Foobar1", password_confirmation:"Foobar1"
     sign_in(username:"Pekka", password:"Foobar1")
@@ -17,6 +18,7 @@ describe "Beers page" do
 
     fill_in('beer_name', with:'')
     select("Koff", from:'beer[brewery_id]')
+    select("Lager", from:'beer[style_id]')
     click_button("Create Beer")
 
     expect(page).to have_content "2 errors prohibited rating from being saved:"

@@ -21,6 +21,7 @@
   </h2>
   <% end %>
 </div>
+<br><br>
 
 <% if @brewery.beers.count >0%>
 <table>
@@ -37,7 +38,7 @@
     <% @brewery.beers.each do |beer| %>
     <tr>
       <td><%= link_to beer.name.capitalize, beer%></td>
-      <td><%= beer.style.capitalize %></td>
+      <td><%= beer.style.name.capitalize %></td>
       <td><%= beer.AverageRating%></td>
       <td><%= beer.ratings.count%></td>
     </tr>
