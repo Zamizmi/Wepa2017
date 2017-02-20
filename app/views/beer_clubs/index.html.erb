@@ -3,7 +3,7 @@
 <h1>Beer Clubs</h1>
 <h2>Number of Beer Clubs: <%=@beer_clubs.count%></h2>
 <br>
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Name</th>
@@ -32,7 +32,7 @@
 </table>
 
 <br>
-<div class="to_button">
+<div class="btn btn-default">
   <% if current_user%>
   <%= link_to 'Create Beer Club', new_beer_club_path%>
   <% else %>

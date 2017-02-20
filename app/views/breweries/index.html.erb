@@ -4,7 +4,7 @@
 <h2> Number of Breweries: <%= @breweries.count %> </h2>
 
 <% unless @breweries.nil?%>
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Name</th>
@@ -29,7 +29,7 @@
 
 <br>
 
-<div class="to_button">
+<div class="btn btn-default">
   <% if current_user%>
   <%= link_to 'Create Brewery', new_brewery_path%>
   <% else %>

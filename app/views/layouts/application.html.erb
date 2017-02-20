@@ -1,40 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Ratebeer</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= content_for?(:title) ? yield(:title) : "Ratebeer" %></title>
+  <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Ratebeer" %>">
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <ul class="navibar">
-    <li><%= link_to 'Breweries', breweries_path %></li>
-    <li><%= link_to 'Beers', beers_path %></li>
-    <li><%= link_to "Ratings", ratings_path%></li>
-    <li><%= link_to "Styles", styles_path%></li>
-    <li><%= link_to "Users", users_path%></li>
-    <li><%= link_to "Beer Clubs", beer_clubs_path%></li>
-    <li><%= link_to "Search places", places_path%></li>
-  </ul>
-  <ul class="navibar">
-    <% if current_user%>
-    <li><%= link_to current_user.username.capitalize, user_path(current_user)%> </li>
-    <li><%= link_to 'Rate a beer', new_rating_path%></li>
-    <% unless current_user.memberships.count >= BeerClub.count%>
-      <li><%= link_to 'Join a club', new_membership_path%></li>
-    <% end %>
-    <li><%= link_to 'Sign out', signout_path%></li>
-    <% else %>
-    <li> <%= link_to 'Sign in', signin_path%></li>
-    <li> <%= link_to 'Sign up', signup_path%></li>
-    <% end %>
-  </ul>
+  <header>
+    <%= render 'layouts/navigation' %>
+  </header>
 
-  <% if current_user %>
-  <h3> Signed in as <%=current_user.username.capitalize %></h3>
-  <%end%>
+  <main role="main" class=".container">
+    <%= render 'layouts/messages' %>
 
-  <%= yield %>
+    <div class="row">
+      <div class="col-md-8">
+        <%= yield %>
+      </div>
+      <div class="col-md-4">
+        <img src="http://www.cs.helsinki.fi/u/mluukkai/wadror/pint.jpg" width="200">
+      </div>
+    </div>
 
+  </main>
 </body>
 </html>

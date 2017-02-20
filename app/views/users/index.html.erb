@@ -2,7 +2,7 @@
 <h1>Users</h1>
 <h2>Number of Users: <%=@users.count%></h2>
 <% unless @users.nil?%>
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Username</th>
@@ -28,6 +28,6 @@
 
   <br>
 
-  <div class="to_button">
+  <div class="btn btn-default">
     <%= link_to 'New User', new_user_path %>
   </div>

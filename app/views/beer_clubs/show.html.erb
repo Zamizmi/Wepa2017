@@ -20,7 +20,7 @@
 </div>
 <br>
 <% if @beer_club.memberships.count >0%>
-<table>
+<table  class="table table-hover">
   <thead>
     <tr>
       <th>Username</th>
@@ -37,7 +37,7 @@
     </tr>
   </tbody>
 <% if current_user and if current_user.id == membership.user_id%>
-  <div class ="to_button">
+  <div class="btn btn-warning">
     <%= link_to 'Leave Club', membership, method: :delete, data: { confirm: 'Are you sure?' } %>
   </div>
   <% end %>
@@ -47,11 +47,11 @@
 <br>
 <%end%>
 
-<div class="to_button">
+<div class="btn btn-primary">
   <% if current_user and if not current_user.memberships.map {|m| m.beer_club.id}.include? @beer_club.id%>
     <%= form_for(@membership) do |f| %>
       <%= f.hidden_field :beer_club_id %>
-      <%= f.submit value:"Join The Club" %>
+      <%= f.submit value:"Join The Club"%>
       <% end %>
     <% end %>
   <% end %>

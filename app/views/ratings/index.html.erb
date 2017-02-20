@@ -4,7 +4,7 @@
   <h2>Number of Ratings: <%=@ratings.count%></h2>
 
   <% unless @ratings.nil?%>
-  <table class="ratings">
+  <table class="table table-hover">
     <thead>
       <tr>
         <th>Beer</th>
@@ -32,7 +32,7 @@
   <% end %>
   <br>
 
-  <div class="to_button">
+  <div class="btn btn-default">
     <% if current_user%>
     <%= link_to 'Add rating', new_rating_path%>
     <% else %>
