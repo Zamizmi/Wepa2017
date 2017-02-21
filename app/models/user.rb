@@ -15,52 +15,21 @@ class User < ActiveRecord::Base
   has_many :ratings,  dependent: :destroy
   has_many :beers, through: :ratings
   def favorite_beer
-    return nil if ratings.empty?
-    ratings.order(score: :desc).limit(1).first.beer
+    favorite :beer
   end
 
   def favorite_style
-    return nil if ratings.empty?
-    calculate_style_scores
-  end
-
-  def style_ratings_average_per_style(style)
-    style_counter = self.ratings.select { |r| r.beer.style == style }
-    i = style_counter.map { |r| r.score }.inject(:+) / style_counter.count.to_f
-  end
-
-  # Kaipaa refaktorointia, mutta toimii
-  def calculate_style_scores
-    favorite =""
-    i = 0
-    self.ratings.map { |r| r.beer.style }.each do |x|
-      if style_ratings_average_per_style(x) > i
-        i = style_ratings_average_per_style(x)
-        favorite = x
-      end
-    end
-    return favorite.name
+    favorite :style
   end
 
   def favorite_brewery
+    favorite :brewery
+  end
+
+  def favorite(category)
     return nil if ratings.empty?
-    calculate_brew_scores
-  end
 
-  def brewery_ratings_average_per_brewery(brewery)
-    brew_counter = self.ratings.select { |r| r.beer.brewery == brewery }
-    i = brew_counter.map { |r| r.score }.inject(:+) / brew_counter.count.to_f
-  end
-
-  def calculate_brew_scores
-    favorite =""
-    i = 0
-    self.ratings.map { |r| r.beer.brewery }.each do |x|
-      if brewery_ratings_average_per_brewery(x) > i
-        i = brewery_ratings_average_per_brewery(x)
-        favorite = x
-      end
-    end
-    return favorite
+    rated = ratings.map{ |r| r.beer.send(category) }.uniq
+    rated.sort_by { |item| -rating_of(category, item) }.first
   end
 end

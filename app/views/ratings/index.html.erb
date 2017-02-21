@@ -32,12 +32,14 @@
   <% end %>
   <br>
 
+  <% if current_user%>
   <div class="btn btn-default">
-    <% if current_user%>
     <%= link_to 'Add rating', new_rating_path%>
-    <% else %>
-    <h2>Sign in to add Ratings!</h2>
-    <br>
+  </div>
+  <% else %>
+  <h2>Sign in to add Ratings!</h2>
+  <br>
+  <div class="btn btn-default">
     <%= link_to 'Sign in', signin_path%>
     <% end %>
   </div>

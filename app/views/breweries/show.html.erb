@@ -3,6 +3,9 @@
 <h1>
   <%= @brewery.name %>
 </h1>
+<% unless @brewery.active  %>
+  <span class="label label-info">retired</span>
+<% end %>
 <div class="info">
   <h2>
     Established in: <%= @brewery.year %>

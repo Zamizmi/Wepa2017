@@ -6,8 +6,8 @@
     0 ratings!
     <% else %><%=@user.ratings.count%> <%="rating".pluralize(@user.ratings.count)%>
     , with the average of <%=@user.AverageRating%> </h2>
-    <h2>Favorite Style is <%=@user.favorite_style%></h2>
-    <h2>Favorite Brewery is <%=@user.favorite_brewery%></h2>
+    <h2>Favorite Style is <%=@user.favorite_style.name%></h2>
+    <h2>Favorite Brewery is <%=@user.favorite_brewery.name%></h2>
     <% end %></h2>
   </div>
 <br>

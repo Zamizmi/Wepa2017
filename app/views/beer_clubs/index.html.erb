@@ -32,12 +32,14 @@
 </table>
 
 <br>
-<div class="btn btn-default">
   <% if current_user%>
+  <div class="btn btn-default">
   <%= link_to 'Create Beer Club', new_beer_club_path%>
+  <div class="btn btn-default">
   <% else %>
   <h2>Sign in to add Beer Clubs!</h2>
   <br>
+  <div class="btn btn-default">
   <%= link_to 'Sign in', signin_path%>
   <% end %>
 </div>
