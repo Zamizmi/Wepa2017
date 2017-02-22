@@ -23,6 +23,11 @@ class Brewery < ActiveRecord::Base
 			puts "established at year #{year}"
 			puts "number of beers #{beer.count}"
 		end
+
+		def self.top(n)
+			sorted_by_rating_in_desc_order = Brewery.all.sort_by{ |b| -(b.AverageRating||0) }
+			sorted_by_rating_in_desc_order.first(n)
+		end
 		#self.ratings.map{|n| n.score}.inject(:+).to_f/self.ratings.count
 
 		def restart

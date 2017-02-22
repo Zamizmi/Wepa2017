@@ -10,7 +10,7 @@
 <h2> Number of Retired Breweries: <%= @retired_breweries.count %> </h2>
 
 <% unless @retired_breweries.nil?%>
-<%= render 'list', breweries: @active_breweries %>
+<%= render 'list', breweries: @retired_breweries %>
 <% end %>
 
 <br>

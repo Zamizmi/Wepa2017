@@ -14,6 +14,12 @@ class User < ActiveRecord::Base
 
   has_many :ratings,  dependent: :destroy
   has_many :beers, through: :ratings
+
+  def rating_of(category, item)
+    ratings_of = ratings.select{ |r| r.beer.send(category)==item }
+    ratings_of.map(&:score).inject(&:+) / ratings_of.count.to_f
+  end
+
   def favorite_beer
     favorite :beer
   end
@@ -31,5 +37,10 @@ class User < ActiveRecord::Base
 
     rated = ratings.map{ |r| r.beer.send(category) }.uniq
     rated.sort_by { |item| -rating_of(category, item) }.first
+  end
+
+  def self.top(n)
+    sorted_by_rating_in_desc_order = User.all.sort_by{ |b| -(b.ratings.count||0) }
+    sorted_by_rating_in_desc_order.first(n)
   end
 end

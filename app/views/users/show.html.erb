@@ -55,10 +55,6 @@
       <tr>
         <td><%= link_to rating.beer, rating.beer %></td>
         <td><%= rating.score%></td>
-        <% if current_user == rating.user%>
-        <td><%= link_to 'Delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to 'Edit', edit_user_path(@user) %></td>
-        <% end %>
       </tr>
       <% end %>
     </tbody>

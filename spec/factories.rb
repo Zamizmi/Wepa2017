@@ -8,6 +8,7 @@ FactoryGirl.define do
   factory :brewery do
     name "Koff"
     year 1900
+    active true
   end
 
   factory :style do
