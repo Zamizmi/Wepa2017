@@ -1,4 +1,5 @@
 class PlacesController < ApplicationController
+  before_action :ensure_that_signed_in, except: [:index, :show]
 
   def index
   end

@@ -1,6 +1,7 @@
 class BreweriesController < ApplicationController
   before_action :set_brewery, only: [:show, :edit, :update, :destroy]
   before_action :ensure_that_signed_in, except: [:index, :show]
+  before_action :ensure_that_admin, only: [:destroy]
 
   # GET /breweries
   # GET /breweries.json
@@ -32,7 +33,7 @@ class BreweriesController < ApplicationController
 
     redirect_to :back, notice:"brewery activity status changed to #{new_status}"
   end
-  
+
   # POST /breweries
   # POST /breweries.json
   def create

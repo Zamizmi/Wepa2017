@@ -38,4 +38,10 @@
   <div class="btn btn-default">
     <%= link_to 'Back', styles_path %>
   </div>
+
+  <% if current_user && current_user.admin  %>
+  <div class="btn btn-warning">
+    <%= link_to 'Delete', @style, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
+  <%end %>
 </body>

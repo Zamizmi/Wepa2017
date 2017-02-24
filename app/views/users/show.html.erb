@@ -66,3 +66,8 @@
   <div class="btn btn-default">
     <%= link_to 'Back', users_path %>
   </div>
+  <% if current_user == @user %>
+  <div class="btn btn-warning">
+    <%= link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
+  <%end %>

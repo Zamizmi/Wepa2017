@@ -46,4 +46,10 @@
     <%= f.submit %>
   <% end %>
 </div>
+
+<% if current_user && current_user.admin  %>
+<div class="btn btn-warning">
+  <%= link_to 'Delete', @beer, method: :delete, data: { confirm: 'Are you sure?' } %>
+</div>
+<%end %>
 <% end %>
