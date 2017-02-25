@@ -14,9 +14,11 @@ Rails.application.routes.draw do
   get 'signin', to: 'sessions#new'
   get 'signout', to: 'sessions#destroy'
   #Show All beers
-  get 'kaikki_bisset', to: 'beers#index'
   get 'places', to: 'places#index'
   post 'places', to:'places#search'
+  resources :users do
+    post 'toggle_activity', on: :member
+  end
   resources :breweries do
     post 'toggle_activity', on: :member
   end

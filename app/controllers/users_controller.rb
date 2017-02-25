@@ -1,11 +1,14 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :ensure_that_signed_in, except: [:index, :show]
+  before_action :ensure_that_admin, only: [:block_user]
 
 
   # GET /users
   # GET /users.json
   def index
+    @blocked_users = User.blocked
+    @allowed_users = User.allowed
     @users = User.all
   end
 
@@ -51,6 +54,15 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def toggle_activity
+    user = User.find(params[:id])
+    user.update_attribute :blocked, (not user.blocked)
+
+    new_status = user.blocked? ? "Frozen" : "Allowed"
+
+    redirect_to :back, notice:"Users blocked status changed to #{new_status}"
   end
 
   # DELETE /users/1

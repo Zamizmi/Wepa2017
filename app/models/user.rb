@@ -15,6 +15,10 @@ class User < ActiveRecord::Base
   has_many :ratings,  dependent: :destroy
   has_many :beers, through: :ratings
 
+  scope :blocked, -> { where active:true }
+  scope :allowed, -> { where active:[nil,false] }
+
+
   def rating_of(category, item)
     ratings_of = ratings.select{ |r| r.beer.send(category)==item }
     ratings_of.map(&:score).inject(&:+) / ratings_of.count.to_f
