@@ -5,31 +5,19 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-b1 = Brewery.create name:"Koff", year:1897
-b2 = Brewery.create name:"Malmgard", year:2001
-b3 = Brewery.create name:"Weihenstephaner", year:1042
-b4 = Brewery.create name:"Soul Series", year:2009
+b1 = Brewery.create name:"Koff", year:1897, active:true
+b2 = Brewery.create name:"Malmgard", year:2001, active:true
+b3 = Brewery.create name:"Weihenstephaner", year:1042, active: true
+b4 = Brewery.create name:"Soul Series", year:2009, active: false
 
-b1.beers.create name:"Iso 3", style_id:1
-b1.beers.create name:"Karhu", style_id:2
-b1.beers.create name:"Tuplahumala", style_id:3
-b2.beers.create name:"Huvila Pale Ale", style_id:4
-b2.beers.create name:"X Porter", style_id:5
-b3.beers.create name:"Hefeweizen", style_id:6
-b3.beers.create name:"Helles", style_id:7
-b4.beers.create name:"Demon's Soul", style_id:8
-b4.beers.create name:"Dark Souls I", style_id:9
-b4.beers.create name:"Dark Souls II", style_id:10
-b4.beers.create name:"Dark Souls III", style_id:11
-
-Style.create name:"American Amber", description:"Primarily a catch all for any beer less than a Dark Ale in color, ranging from amber (duh) to deep red hues. This style of beer tends to focus on the malts, but hop character can range from low to high. Expect a balanced beer, with toasted malt characters and a light fruitiness in most examples. The range can run from a basic ale, to American brewers who brew faux-Oktoberfest style beers that are actually ales instead of lagers.
+s1 = Style.create name:"American Amber", description:"Primarily a catch all for any beer less than a Dark Ale in color, ranging from amber (duh) to deep red hues. This style of beer tends to focus on the malts, but hop character can range from low to high. Expect a balanced beer, with toasted malt characters and a light fruitiness in most examples. The range can run from a basic ale, to American brewers who brew faux-Oktoberfest style beers that are actually ales instead of lagers.
 "
-Style.create name:"American Barleywine", description:"Despite its name, a Barleywine (or Barley Wine) is very much a beer, albeit a very strong and often intense beer! In fact, it's one of the strongest of the beer styles. Lively and fruity, sometimes sweet, sometimes bittersweet, but always alcoholic. A brew of this strength and complexity can be a challenge to the palate. Expect anything from an amber to dark brown colored beer, with aromas ranging from intense fruits to intense hops. Body is typically thick, alcohol will definitely be perceived, and flavors can range from dominant fruits to palate smacking, resiny hops.
+s2 =Style.create name:"American Barleywine", description:"Despite its name, a Barleywine (or Barley Wine) is very much a beer, albeit a very strong and often intense beer! In fact, it's one of the strongest of the beer styles. Lively and fruity, sometimes sweet, sometimes bittersweet, but always alcoholic. A brew of this strength and complexity can be a challenge to the palate. Expect anything from an amber to dark brown colored beer, with aromas ranging from intense fruits to intense hops. Body is typically thick, alcohol will definitely be perceived, and flavors can range from dominant fruits to palate smacking, resiny hops.
 
 English varieties are quite different from the American efforts, what sets them apart is usually the American versions are insanely hopped to make for a more bitter and hop flavored brew, typically using American high alpha oil hops. English versions tend to be more rounded and balanced between malt and hops, with a slightly lower alcohol content, though this is not always the case."
-Style.create name:"American Black Ale", description:"Also referred to as a Black IPA (India Pale Ale) or Cascadian Dark Ale, ales of this style range from dark brown to pitch black and showcase malty and light to moderate roasty notes and are often quite hoppy generally with the use of American hops. Alcohol can range from average to high depending on if the brewery is going for a 'dobule / imperial' version."
-Style.create name:"American Brown Ale", description:"Spawned from the English Brown Ale, the American version can simply use American ingredients. Many other versions may have additions of coffee or nuts. This style also encompasses 'Dark Ales'. The bitterness and hop flavor has a wide range and the alcohol is not limited to the average either."
-Style.create name:"American Blonde Ale", description:"More or less a creation from the craft-brewery movement, and also reminiscent of the German style Kölsch. Pale straw to deep gold for color. Usually an all malt brew, well attenuated with a lightly malty palate. Most have a subdued fruitiness. Hop character is of the noble variety, or similar, leaving a light to medium bitterness. A balanced beer, light bodied and sometimes lager like.
+s3 =Style.create name:"American Black Ale", description:"Also referred to as a Black IPA (India Pale Ale) or Cascadian Dark Ale, ales of this style range from dark brown to pitch black and showcase malty and light to moderate roasty notes and are often quite hoppy generally with the use of American hops. Alcohol can range from average to high depending on if the brewery is going for a 'dobule / imperial' version."
+s4 =Style.create name:"American Brown Ale", description:"Spawned from the English Brown Ale, the American version can simply use American ingredients. Many other versions may have additions of coffee or nuts. This style also encompasses 'Dark Ales'. The bitterness and hop flavor has a wide range and the alcohol is not limited to the average either."
+s5=Style.create name:"American Blonde Ale", description:"More or less a creation from the craft-brewery movement, and also reminiscent of the German style Kölsch. Pale straw to deep gold for color. Usually an all malt brew, well attenuated with a lightly malty palate. Most have a subdued fruitiness. Hop character is of the noble variety, or similar, leaving a light to medium bitterness. A balanced beer, light bodied and sometimes lager like.
 "
 Style.create name:"American Dark Wheat Ale", description:"An Americanized version of a Dunkel Weizen, these beers can range within the brown to garnet range. Often cloudy with long-lasting heads. Light to medium body with high level of carbonation. Hop characters will be low to high with some fruitiness from ale fermentation, though most examples use of a fairly neutral ale yeast, resulting in a clean fermentation with little to no diacetyl. Flavors of caramel and toasted malts might be present."
 Style.create name:"American Double / Imperial IPA", description:"Take an India Pale Ale and feed it steroids, ergo the term Double IPA. Although open to the same interpretation as its sister styles, you should expect something robust, malty, alcoholic and with a hop profile that might rip your tongue out. The Imperial usage comes from Russian Imperial stout, a style of strong stout originally brewed in England for the Russian Imperial Court of the late 1700s; though Double IPA is often the preferred name."
@@ -56,3 +44,15 @@ Style.create name:"Pumpkin Ale", description:"Often released as a fall seasonal,
 Style.create name:"Rye Beer
 ", description:"Not to be confused with a German Roggenbier, beers that fall into this category contain a notable amount of rye grain in the grist bill. Bitterness tends to be moderate, to allow the often spicy and sour-like rye characteristics to pull through."
 Style.create name:"Wheatwine", description:"A somewhat recent and over-looked American strong ale, the Wheatwine (or Wheat Wine) is akin to a Barleywine in strength, but contains a large portion of wheat malt; upwards of 50%. The wheat provides a soft and fluffy mouthfeel. Color and bitterness varies."
+
+b1.beers.create name:"Iso 3", style_id:s1.id
+b1.beers.create name:"Karhu", style_id:s1.id
+b1.beers.create name:"Tuplahumala", style_id:s1.id
+b2.beers.create name:"Huvila Pale Ale", style_id:s1.id
+b2.beers.create name:"X Porter", style_id:s2.id
+b3.beers.create name:"Hefeweizen", style_id:s2.id
+b3.beers.create name:"Helles", style_id:s3.id
+b4.beers.create name:"Demon's Soul", style_id:s3.id
+b4.beers.create name:"Dark Souls I", style_id:s3.id
+b4.beers.create name:"Dark Souls II", style_id:s4.id
+b4.beers.create name:"Dark Souls III", style_id:s4.id
