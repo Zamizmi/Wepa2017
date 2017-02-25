@@ -6,6 +6,10 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by username: params[:username]
+    if user.nil?
+      redirect_to :back
+      return
+    end
     if user.blocked
       redirect_to :back, notice: "Your account is frozen, contact Administration immediatly!"
       return

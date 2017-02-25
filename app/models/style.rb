@@ -5,7 +5,6 @@ class Style < ActiveRecord::Base
   has_many :ratings, through: :beers
 
   def self.top(n)
-
     sorted_by_rating_in_desc_order = Style.all.sort_by{ |s| -(s.AverageRating||0) }
     sorted_by_rating_in_desc_order.first(n)
   end
