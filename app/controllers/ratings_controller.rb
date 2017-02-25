@@ -9,6 +9,7 @@ class RatingsController < ApplicationController
     @breweries = Brewery.all.top(3)
     @beers = Beer.all.top 3
     @users = User.all.top 3
+    @styles = Style.all.top(3)
   #  render :ratings
   end
 
