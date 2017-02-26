@@ -30,85 +30,20 @@
     </tbody>
   </table>
 
-  <table class="table table-hover">
-    <h2>Three Best Breweries</h2>
-    <thead>
-      <tr>
-        <th>Brewery</th>
-        <th>Average Score</th>
-        <th colspan="2"></th>
-      </tr>
-    </thead>
+  <h2>Best Breweries</h2>
+  <%= render 'breweries_list', breweries: @breweries %>
 
-    <tbody>
-      <% @breweries.each do |brewery| %>
-      <tr>
-        <td><%= link_to brewery.name, brewery %></td>
-        <td><%= brewery.AverageRating%></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
 
-  <table class="table table-hover">
-    <h2>Three Best Beers</h2>
-    <thead>
-      <tr>
-        <th>Beer</th>
-        <th>Average Score</th>
-        <th colspan="2"></th>
-      </tr>
-    </thead>
+  <h2>Best Beers</h2>
+  <%= render 'beers_list', beers: @beers %>
 
-    <tbody>
-      <% @beers.each do |beer| %>
-      <tr>
-        <td><%= link_to beer.name, beer %></td>
-        <td><%= beer.AverageRating%></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <h2>Three Most Active Users</h2>
+  <%= render 'users_list', users: @users %>
 
-  <table class="table table-hover">
-    <h2>Three Most Active Users</h2>
-    <thead>
-      <tr>
-        <th>User</th>
-        <th># of Ratings</th>
-        <th colspan="2"></th>
-      </tr>
-    </thead>
 
-    <tbody>
-      <% @users.each do |user| %>
-      <tr>
-        <td><%= link_to user.username, user %></td>
-        <td><%= user.ratings.count%></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <h2>Best Styles</h2>
+  <%= render 'styles_list', styles: @styles %>
 
-  <table class="table table-hover">
-    <h2>Best Styles</h2>
-    <thead>
-      <tr>
-        <th>Style</th>
-        <th>Average</th>
-        <th colspan="2"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @styles.each do |style| %>
-      <tr>
-        <td><%= link_to style.name, style %></td>
-        <td><%= style.AverageRating%></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
   <% end %>
   <br>
 

@@ -1,124 +1,70 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+include Helpers
 
+describe "User" do
+  let!(:user) { FactoryGirl.create :user }
 
-  describe "favorite style" do
-    let(:user) { FactoryGirl.create(:user) }
+  describe "who has signed up" do
+    it "can signin with right credentials" do
+      sign_in(username:"Pekka", password:"Foobar1")
 
-    it "has a method for determining one" do
-      expect(user).to respond_to(:favorite_style)
+      expect(page).to have_content 'Welcome back!'
+      expect(page).to have_content 'Pekka'
     end
 
-    it "without ratings does not have one" do
-      expect(user.favorite_style).to eq(nil)
-    end
+    it "is redirected back to signin form if wrong credentials given" do
+      sign_in(username:"Pekka", password:"wrong")
 
-    it "is the only style with a rating" do
-      beer = FactoryGirl.create(:beer)
-      brewery = FactoryGirl.create(:rating, beer:beer, user:user)
-      style = FactoryGirl.create(:style)
-
-      expect(user.favorite_style.name).to eq(beer.style.name)
-    end
-
-    it "is the one with highest rating if several rated" do
-      style = FactoryGirl.create(:style)
-      style2 = FactoryGirl.create(:style2)
-      beer1 = FactoryGirl.create(:beer, style_id:style.id)
-      beer2 = FactoryGirl.create(:beer, style_id:style.id)
-      beer3 = FactoryGirl.create(:beer, style_id:style2.id)
-
-      rating1 = FactoryGirl.create(:rating, beer:beer1, user:user)
-      rating2 = FactoryGirl.create(:rating, score:25,  beer:beer2, user:user)
-      rating3 = FactoryGirl.create(:rating, score:50, beer:beer3, user:user)
-
-      expect(user.favorite_style.name).to eq(beer3.style.name)
+      expect(current_path).to eq(signin_path)
+      expect(page).to have_content 'Username and/or password mismatch'
     end
   end
 
-  describe "favorite beer" do
-    let(:user){FactoryGirl.create(:user)}
+  it "when signed up with good credentials, is added to the system" do
+    visit signup_path
+    fill_in('user_username', with:'Brian')
+    fill_in('user_password', with:'Secret55')
+    fill_in('user_password_confirmation', with:'Secret55')
 
-    it "has method for determining the favorite_beer" do
-      expect(user).to respond_to(:favorite_beer)
+    expect{
+      click_button('Create User')
+    }.to change{User.count}.by(1)
+  end
+
+  describe "when have givent ratings" do
+    before :each do
+      create_beers_with_ratings(FactoryGirl.create(:brewery), FactoryGirl.create(:style), user, 7, 9)
+      create_beers_with_ratings(FactoryGirl.create(:brewery, name: "Schlenkerla"), FactoryGirl.create(:style, name:"bock") , user, 10)
+      user2 = FactoryGirl.create(:user, username: "Brian")
+      create_beers_with_ratings(FactoryGirl.create(:brewery), FactoryGirl.create(:style), user2, 50)
+      visit user_path(user.id)
     end
 
-    it "without ratings user does not have a favorite beer" do
-      expect(user.favorite_beer).nil?
+    it "those are listed at users page" do
+      expect(page).to have_content "anonymous 10"
+      expect(page).to have_content "anonymous 7"
+      expect(page).to have_content "anonymous 9"
     end
 
-    it "is the only rated if only one rating" do
-      beer = FactoryGirl.create(:beer)
-      rating = FactoryGirl.create(:rating, beer:beer, user:user)
-
-      expect(user.favorite_beer).nil?
+    it "only those are listed users page" do
+      expect(page).to have_no_content "anonymous 50"
     end
 
-    it "is the one with the highest rating if several rated" do
-      beer1 = FactoryGirl.create(:beer)
-      beer2 = FactoryGirl.create(:beer)
-      beer3 = FactoryGirl.create(:beer)
-      rating1 = FactoryGirl.create(:rating, beer:beer1, user:user)
-      rating2 = FactoryGirl.create(:rating, score:25,  beer:beer2, user:user)
-      rating3 = FactoryGirl.create(:rating, score:9, beer:beer3, user:user)
-
-      expect(user.favorite_beer.name).to eq(beer2.name)
-    end
-  end
-
-  it "has the Username set correctly" do
-    user = User.new username:"Pekka"
-
-    expect(user.username).to eq"Pekka"
-  end
-
-  it "is not saved without a Password" do
-    user = User.create username:"Pekka"
-
-    expect(user).not_to be_valid
-    expect(User.count).to eq(0)
-  end
-
-  it "is not saved with too short Password" do
-    user = User.create username:"Pekka", password:"sec", password_confirmation:"sec"
-    expect(user).not_to be_valid
-    expect(User.count).to eq(0)
-  end
-
-  it "is not saved with Password containing only small letters" do
-    user = User.create username:"Pekka", password:"secret", password_confirmation:"secret"
-    expect(user).not_to be_valid
-    expect(User.count).to eq(0)
-  end
-
-  it "is not saved with Password containing small and capital letters" do
-    user = User.create username:"Pekka", password:"Secret", password_confirmation:"Secret"
-    expect(user).not_to be_valid
-    expect(User.count).to eq(0)
-  end
-
-  it "is saved with a proper Password" do
-    user= User.create username:"Pekka", password:"Secret1", password_confirmation:"Secret1"
-
-    expect(user).to be_valid
-    expect(User.count).to eq(1)
-  end
-
-  describe "with a proper Password" do
-    let(:user) { FactoryGirl.create(:user)}
-
-    it "is saved" do
-      expect(user).to be_valid
-      expect(User.count).to eq(1)
+    it "when logged in, can delete own ratings" do
+      sign_in(username:"Pekka", password:"Foobar1")
+      visit user_path(user.id)
+      expect{
+        page.all('a')[10].click
+      }.to change{Rating.count}.by(-1)
     end
 
-    it "and with two ratings, has the correct Average_Rating" do
-      user.ratings << FactoryGirl.create(:rating)
-      user.ratings << FactoryGirl.create(:rating2)
+    it "favorite style is shown at user page" do
+      expect(page).to have_content "Favorite style: bock"
+    end
 
-      expect(user.ratings.count).to eq(2)
-      expect(user.AverageRating).to eq(20)
+    it "favorite brewery is shown at user page" do
+      expect(page).to have_content "Favorite brewery: Schlenkerla"
     end
   end
 end
