@@ -30,6 +30,7 @@
     <tbody>
       <% @user.memberships.each do |membership| %>
       <tr>
+        <%binding.pry%>
         <td><%= link_to membership.beer_club.name.capitalize, membership.beer_club%></td>
         <td><%= membership.created_at.year%> - <%= membership.created_at.month%> - <%= membership.created_at.day%></td>
         <% if membership.user == current_user %>
