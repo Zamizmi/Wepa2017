@@ -69,11 +69,12 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
 
   def destroy
-    user = User.find(params[:id])
-    reset_session
-    user.destroy if current_user == user
-    reset_session
-    redirect_to :back
+    @user.destroy if @user==current_user
+    session[:user_id] = nil
+    respond_to do |format|
+      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   private

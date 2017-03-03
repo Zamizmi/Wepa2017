@@ -44,11 +44,9 @@ class MembershipsController < ApplicationController
   # DELETE /memberships/1
   # DELETE /memberships/1.json
   def destroy
-    membership = Membership.find(params[:id])
-    membership.delete if current_user == membership.user
-    reset_session
+    @membership.destroy
     respond_to do |format|
-      format.html { redirect_to beer_clubs_path, notice: 'Your membership was successfully ended.' }
+      format.html { redirect_to @membership.user, notice: "Your membership #{@membership.beer_club.name} ended" }
       format.json { head :no_content }
     end
   end
