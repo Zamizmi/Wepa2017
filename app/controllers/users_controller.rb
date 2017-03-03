@@ -70,6 +70,7 @@ class UsersController < ApplicationController
 
   def destroy
     user = User.find(params[:id])
+    reset_session
     user.destroy if current_user == user
     reset_session
     redirect_to :back

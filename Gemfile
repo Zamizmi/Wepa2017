@@ -8,6 +8,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'byebug'
   gem 'httparty'
+  gem 'jquery-turbolinks'
 end
 
 group :production do
