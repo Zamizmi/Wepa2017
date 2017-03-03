@@ -55,6 +55,12 @@ $(document).ready(function () {
             e.preventDefault();
         });
 
+        $("#beers").click(function (e) {
+            BREWERIES.sort_by_beers();
+            BREWERIES.show();
+            e.preventDefault();
+        });
+
         $.getJSON('breweries.json', function (breweries) {
             BREWERIES.list = breweries;
             BREWERIES.sort_by_name();

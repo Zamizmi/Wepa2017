@@ -26,6 +26,8 @@ group :test do
   gem 'rspec-its'
   gem 'simplecov', require: false
   gem 'webmock'
+  gem 'selenium-webdriver', '2.53.4'
+  gem 'database_cleaner'
 end
 
 ruby '2.3.1'
