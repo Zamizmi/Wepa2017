@@ -22,7 +22,7 @@
       <td><%= beer_club.city.capitalize %></td>
       <td><%= beer_club.memberships.count%></td>
       <% if current_user %>
-      <% unless beer_club.users.include? (current_user)%>
+      <% unless beer_club.memberships.each {|m| m.user = current_user}%>
       <td><%= link_to 'Join Club', new_membership_path%></td>
       <% end %>
       <% end %>
