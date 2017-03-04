@@ -23,23 +23,54 @@ describe "Beerlist page" do
   end
 
   after :each do
-  DatabaseCleaner.clean
-end
+    DatabaseCleaner.clean
+  end
 
-after :all do
-  self.use_transactional_fixtures = true
-end
+  after :all do
+    self.use_transactional_fixtures = true
+  end
 
-  it "shows one known beer", js:true do
+  it "shows one known beer", :js =>true do
     visit beerlist_path
     save_and_open_page
     expect(page).to have_content "Nikolai"
   end
 
   it "shows a known beer", :js => true do
-  visit beerlist_path
-  find('table').find('tr:nth-child(2)')
-  save_and_open_page
-  expect(page).to have_content "Nikolai"
-end
+    visit beerlist_path
+    find('table').find('tr:nth-child(2)')
+
+    expect(page).to have_content "Nikolai"
+  end
+
+    it "shows beers in right order", :js => true do
+      visit beerlist_path
+      save_and_open_page
+      expect(find('table').find('tr:nth-child(2)')).to have_content"Fastenbier"
+
+      expect(find('table').find('tr:nth-child(3)')).to have_content"Lechte Weisse"
+
+      expect(find('table').find('tr:nth-child(4)')).to have_content"Nikolai"
+    end
+
+    it "makes order correct when clicking style", :js=> true do
+      visit beerlist_path
+      click_link("style")
+      expect(find('table').find('tr:nth-child(2)')).to have_content"Nikolai"
+
+      expect(find('table').find('tr:nth-child(3)')).to have_content"Fastenbier"
+
+      expect(find('table').find('tr:nth-child(4)')).to have_content"Lechte Weisse"
+    end
+
+    it "makes order correct when clicking brewery", :js=> true do
+      visit beerlist_path
+      click_link("brewery")
+      expect(find('table').find('tr:nth-child(2)')).to have_content"Lechte Weisse"
+
+      expect(find('table').find('tr:nth-child(3)')).to have_content"Nikolai"
+
+      expect(find('table').find('tr:nth-child(4)')).to have_content"Fastenbier"
+    end
+
 end
