@@ -7,9 +7,9 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @blocked_users = User.blocked
-    @allowed_users = User.allowed
-    @users = User.all
+    @blocked_users = User.includes(:beers, :ratings).blocked
+    @allowed_users = User.includes(:beers, :ratings).allowed
+    @users = User.includes(:beers, :ratings).all
   end
 
   # GET /users/1

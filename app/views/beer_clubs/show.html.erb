@@ -15,11 +15,11 @@
 
   <h2>
     Members:
-    <%= @beer_club.memberships.count %>
+    <%= @beer_club.memberships.confirmed.count %>
   </h2>
 </div>
 <br>
-<% if @beer_club.memberships.count >0%>
+<% if @beer_club.memberships.confirmed.count >0%>
 <table  class="table table-hover">
   <thead>
     <tr>
@@ -31,29 +31,60 @@
 
   <tbody>
     <% @beer_club.memberships.each do |membership| %>
+    <% if membership.confirmed%>
     <tr>
       <td><%= link_to membership.user.username.capitalize, membership.user%></td>
-      <td><%= membership.created_at.year%> - <%=membership.created_at.month%> - <%= membership.created_at.day%></td>
+      <td><%= membership.created_at.year%> - <%=membership.created_at.month%> - <%= membership.created_at.day%> - </td>
     </tr>
+    <%end%>
+    <%end%>
   </tbody>
-<% if current_user and if current_user.id == membership.user_id%>
-  <div class="btn btn-warning">
-    <%= link_to 'Leave Club', membership, method: :delete, data: { confirm: 'Are you sure?' } %>
-  </div>
-  <% end %>
-  <% end %>
-<% end %>
 </table>
+  <%end%>
+
+  <%if @beer_club.memberships.unconfirmed.count >0%>
+  <h2>Pending Applications</h2>
+  <table  class="table table-hover">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @beer_club.memberships.unconfirmed.each do |membership| %>
+      <% unless membership.confirmed%>
+      <tr>
+        <td><%= link_to membership.user.username, user_path(membership.user_id)%></td>
+        <% if current_user and if current_user.id == membership.user_id and if membership.confirmed?%>
+        <td>
+          <div class="btn btn-warning">
+            <%= link_to 'Leave Club', membership, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </div>
+        </td>
+        <%end%>
+        <% if current_user and current_user.memberships.confirmed.find_by(beer_club: @beer_club.id) %>
+        <%= link_to "Activate Membership", toggle_confirmation_membership_path(membership.id), method: :post, class: "btn btn-xs btn-default" %>
+        <%end%>
+      </tr>
+      <%end%>
+      <%end%>
+      <%end%>
+    </tbody>
+  </table>
+
+  <br>
+  <%end%>
 <br>
 <%end%>
 
 <div class="btn btn-primary">
   <% if current_user and if not current_user.memberships.map {|m| m.beer_club.id}.include? @beer_club.id%>
-    <%= form_for(@membership) do |f| %>
-      <%= f.hidden_field :beer_club_id %>
-      <%= f.submit value:"Join The Club"%>
-      <% end %>
-    <% end %>
+  <%= form_for(@membership) do |f| %>
+  <%= f.hidden_field :beer_club_id %>
+  <%= f.submit value:"Join The Club"%>
+  <% end %>
+  <% end %>
   <% end %>
   <br><br>
   <%= link_to 'Back', beer_clubs_path %>

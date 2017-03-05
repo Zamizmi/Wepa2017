@@ -28,9 +28,8 @@
     </thead>
 
     <tbody>
-      <% @user.memberships.each do |membership| %>
+      <% @user.memberships.confirmed.each do |membership| %>
       <tr>
-        <%binding.pry%>
         <td><%= link_to membership.beer_club.name.capitalize, membership.beer_club%></td>
         <td><%= membership.created_at.year%> - <%= membership.created_at.month%> - <%= membership.created_at.day%></td>
         <% if membership.user == current_user %>
@@ -43,7 +42,31 @@
   <% else %>
   <h2> Is not a member in any club yet!</h2>
   <% end %>
+  <br>
 
+  <%if @user.memberships.unconfirmed.count >0%>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Beer Club</th>
+        <th>Left the Request</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @user.memberships.unconfirmed.each do |membership| %>
+      <tr>
+        <td><%= link_to membership.beer_club.name.capitalize, membership.beer_club%></td>
+        <td><%= membership.created_at.year%> - <%= membership.created_at.month%> - <%= membership.created_at.day%></td>
+        <% if membership.user == current_user %>
+        <td><%= link_to 'Delete your Request', membership, method: :delete, data: { confirm:  'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%end%>
   <br>
 
   <% if @user.ratings.count >0 %>

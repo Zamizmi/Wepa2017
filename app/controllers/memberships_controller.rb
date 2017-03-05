@@ -18,6 +18,12 @@ class MembershipsController < ApplicationController
     @new_beer_clubs.delete(current_user.beer_clubs.ids)
   end
 
+  def toggle_confirmation
+    membership = Membership.find(params[:id])
+    membership.update_attribute(:confirmed, true)
+    redirect_to :back, notice:"Membership accepted for #{membership.user.username}"
+  end
+
   # GET /memberships/1/edit
 
   # POST /memberships
@@ -26,10 +32,10 @@ class MembershipsController < ApplicationController
     @membership = Membership.new(membership_params)
     @membership.user_id = current_user.id
 
-
     respond_to do |format|
       if @membership.save
-        format.html { redirect_to beer_club_path(@membership.beer_club_id), notice: "#{current_user.username}, welcome to the club!" }
+        @membership.update_attribute(:confirmed, false)
+        format.html { redirect_to beer_club_path(@membership.beer_club_id), notice: "#{current_user.username}, your membership request has been sent to the Members for approval!" }
         format.json { render :show, status: :created, location: @membership }
       else
         format.html { render :new }

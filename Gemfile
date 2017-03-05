@@ -9,6 +9,7 @@ group :development, :test do
   gem 'byebug'
   gem 'httparty'
   gem 'jquery-turbolinks'
+  gem 'rack-mini-profiler'
 end
 
 group :production do

@@ -17,6 +17,8 @@ class BeerClubsController < ApplicationController
     @membership = Membership.new
     @membership.user = current_user
     @membership.beer_club = @beer_club
+    @memberships_confirmed = Membership.confirmed
+    @memberships_unconfirmed = Membership.unconfirmed
   end
 
   # GET /beer_clubs/new
@@ -29,7 +31,6 @@ class BeerClubsController < ApplicationController
     if current_user && current_user.authenticate(params[:password])
     end
   end
-
   # POST /beer_clubs
   # POST /beer_clubs.json
   def create
@@ -37,6 +38,7 @@ class BeerClubsController < ApplicationController
 
     respond_to do |format|
       if @beer_club.save
+        current_user.memberships.create beer_club_id:@beer_club.id, user_id:current_user.id, confirmed:true
         format.html { redirect_to @beer_club, notice: 'Beer club was successfully created.' }
         format.json { render :show, status: :created, location: @beer_club }
       else

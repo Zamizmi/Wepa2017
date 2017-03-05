@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Breweries</h1>
+<% cache 'brewerylist', skip_digest: true do %>
 <h2> Number of Active Breweries: <%= @active_breweries.count %> </h2>
 
 <% unless @active_breweries.nil?%>
@@ -11,7 +12,8 @@
 
 <% unless @retired_breweries.nil?%>
 <%= render 'list', breweries: @retired_breweries %>
-<% end %>
+<%end%>
+<%end%>
 
 <br>
 

@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Beers</h1>
+
+<% cache 'beerlist', skip_digest: true do %>
 <h2>Number of Beers: <%=@beers.count%></h2>
 <body>
   <% unless @beers.nil?%>
@@ -27,8 +29,8 @@
   </div>
 
 
-  <% end %>
-
+  <%end%>
+  <%end%>
   <br>
   <% if current_user%>
   <div class="btn btn-default">
