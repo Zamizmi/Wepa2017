@@ -13,16 +13,21 @@ class BeersController < ApplicationController
 
   def skip_if_cached
     @order = params[:order] || 'name'
-    return render :index if request.format.html? and fragment_exist?( "beerlist-#{@order}"  )
+    return render :index if request.format.html? and fragment_exist? ("beerlist-#{@order}")
   end
 
   def index
     @beers = Beer.includes(:brewery, :style).all
 
+    @order = params[:order] || 'name'
+
     @beers = case @order
-      when 'name' then @beers.sort_by{ |b| b.name }
-      when 'brewery' then @beers.sort_by{ |b| b.brewery.name }
-      when 'style' then @beers.sort_by{ |b| b.style.name }
+    when 'name' then
+      @beers.sort_by { |b| b.name }
+    when 'brewery' then
+      @beers.sort_by { |b| b.brewery.name }
+    when 'style' then
+      @beers.sort_by { |b| b.style.name }
     end
   end
 
