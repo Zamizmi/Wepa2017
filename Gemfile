@@ -8,8 +8,6 @@ group :development, :test do
   gem 'pry-rails'
   gem 'byebug'
   gem 'httparty'
-  gem 'jquery-turbolinks'
-  gem 'rack-mini-profiler'
 end
 
 group :production do
@@ -18,6 +16,8 @@ group :production do
    gem 'pg'
    gem 'rails_12factor'
    gem 'httparty'
+   gem 'rack-mini-profiler'
+   gem 'jquery-turbolinks'
 end
 
 group :test do

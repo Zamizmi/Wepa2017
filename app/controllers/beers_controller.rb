@@ -51,8 +51,6 @@ class BeersController < ApplicationController
   # POST /beers
   # POST /beers.json
   def create
-    expire_fragment('beerlist')
-    ["beerlist-name", "beerlist-year", "beerlist-brewery"].each{ |f| expire_fragment(f) }
     @beer = Beer.new(beer_params)
 
     respond_to do |format|
