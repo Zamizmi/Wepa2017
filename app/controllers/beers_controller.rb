@@ -46,6 +46,7 @@ class BeersController < ApplicationController
 
   # GET /beers/1/edit
   def edit
+    expire_fragments
     set_breweries_and_styles_for_template
   end
 
@@ -56,6 +57,7 @@ class BeersController < ApplicationController
   # POST /beers
   # POST /beers.json
   def create
+    expire_fragments
     @beer = Beer.new(beer_params)
 
     respond_to do |format|
@@ -76,8 +78,7 @@ class BeersController < ApplicationController
   # PATCH/PUT /beers/1
   # PATCH/PUT /beers/1.json
   def update
-    expire_fragment('beerlist')
-    ["beerlist-name", "beerlist-year", "beerlist-brewery"].each{ |f| expire_fragment(f) }
+    expire_fragments
     if user && user.authenticate(params[:password])
       respond_to do |format|
         if @beer.update(beer_params)
@@ -94,7 +95,7 @@ class BeersController < ApplicationController
   # DELETE /beers/1
   # DELETE /beers/1.json
   def destroy
-    expire_fragment('beerlist')
+    expire_fragments
     @beer.destroy
     respond_to do |format|
       format.html { redirect_to beers_url, notice: 'Beer was successfully destroyed.' }
@@ -112,4 +113,8 @@ class BeersController < ApplicationController
   def beer_params
     params.require(:beer).permit(:name, :style_id, :brewery_id)
   end
+
+  def expire_fragments
+      ["beerlist-name", "beerlist-brewery", "beerlist-style"].each{ |f| expire_fragment(f) }
+    end
 end
